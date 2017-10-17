@@ -5,10 +5,14 @@ myApp.controller('UserController', function (UserService) {
   vm.userObject = UserService.userObject;
   vm.appliancesObj = UserService.appliancesObj;
 
-  vm.getAppliances = function() {
+  //get all appliances in DB to the DOM
+  vm.getAppliances = function () {
     UserService.getAppliances();
     console.log('inside controller getAppliances');
-};
+  };
 
+  //load all appliances from DB as part of Intake Form
   vm.getAppliances();
+
+
 });

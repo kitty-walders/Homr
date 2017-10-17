@@ -4,6 +4,8 @@
     <h2><u>Intake Form</u></h2>
     <div ng-repeat="i in uc.appliancesObj.appliance">
         <!-- <p>{{i.appliance_name}}</p> -->
-        <label for="applianceExists">Do you have {{i.appliance_name}}?</label><input id="applianceExists" type=radio ng-model="i.appliance_name">
+        <label for="applianceExists">Do you have a/an {{i.appliance_name}}?
+            <input id="applianceExists" type="checkbox" ng-model="i.exists" ng-value="true">
+        </label>
     </div>
 </div>
