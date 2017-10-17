@@ -20,6 +20,33 @@ router.get('/', function(req, res) {
   }
 });
 
+// //get all appliances from database
+// router.get('/appliances', function(req,res) {
+//   console.log('inside the get /appliances route');
+//     //check if user is logged in
+//     if(req.isAuthenticated()){
+//       console.log('logged in user and get appliances');
+//       pool.connect(function(err, client, done) {
+//         if(err) {
+//           console.log("Error connecting: ", err);
+//           res.sendStatus(500);
+//         }
+//         client.query("INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id",
+//           [saveUser.username, saveUser.password],
+//             function (err, result) {
+//               client.end();
+    
+//               if(err) {
+//                 console.log("Error inserting data: ", err);
+//                 res.sendStatus(500);
+//               } else {
+//                 res.sendStatus(201);
+//               }
+//             });
+//       });
+//     }
+// });
+
 // clear all server session information about this user
 router.get('/logout', function(req, res) {
   // Use passport's built-in method to log out the user
