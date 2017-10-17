@@ -3,6 +3,7 @@ myApp.service('UserService', function($http, $location){
   var self = this;
 
   self.userObject = {};
+  self.appliancesObj = {appliance: []};
 
     self.getuser = function(){
       // console.log('UserService -- getuser');
@@ -21,6 +22,17 @@ myApp.service('UserService', function($http, $location){
           }
       })
     };
+
+    self.getAppliances = function () {
+      console.log('UserService -> getAppliances line 27');
+      $http({
+          method: 'GET',
+          url: '/appliances'
+      }).then(function(res) {
+          self.appliancesObj.appliance = res.data;
+          console.log('in service and back from server', self.appliancesObj.appliance);
+      });
+  }; 
 
     self.logout = function() {
       // console.log('UserService -- logout');
