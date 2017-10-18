@@ -35,6 +35,8 @@ router.post('/', function (req, res) {
   console.log('inside the server router returning all my selected appliance_id', allMyTools);
 
   pool.connect(function (conErr, client, done) {
+    var errorInLoop;
+
     if (conErr) {
       res.sendStatus(500);
     } else {
@@ -42,13 +44,16 @@ router.post('/', function (req, res) {
         client.query('INSERT INTO users_appliances(user_id, appliance_id) VALUES($1, $2)',
           [userId, appliance_id], function (queryErr, resultObj) {
             done();
-            if (queryErr) {
-              res.sendStatus(500);
-            } else {
-              res.sendStatus(200);
-            }
+            errorInLoop = queryErr;
           });
       })
+
+      if (errorInLoop) {
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(200);
+        //successfully added all appliances to this user
+      }
     }
   });
 
