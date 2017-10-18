@@ -8,6 +8,7 @@ myApp.controller('UserController', function (UserService) {
   //get all appliances in DB to the DOM
   vm.getAppliances = function () {
     UserService.getAppliances();
+    swal("Let's get started with Homr!", "First things first. Fill out our intake form to start generating your Homr schedule!");
     console.log('inside controller getAppliances');
   };
 
@@ -21,11 +22,9 @@ myApp.controller('UserController', function (UserService) {
       }).map(function(appliance){return appliance.appliance_id})
     );
     console.log('filtered and mapped', selectedAppliances);
-
     var myAppliances = {
       myAppliances: selectedAppliances,
     };
-
     UserService.myAppliances(myAppliances);
   }
 });

@@ -38,9 +38,10 @@ myApp.service('UserService', function($http, $location){
         url: '/appliances',
         data: myAppliances,
       })
-      // .then(function (res) {
-      //   console.log('Service has working POST for myAppliances');
-      // });
+      .then(function (res) {
+        console.log('Service has working POST for myAppliances');
+        swal("Thanks for adding your appliances to Homr", "Beep Beep");
+      });
     }
 
     self.logout = function() {
