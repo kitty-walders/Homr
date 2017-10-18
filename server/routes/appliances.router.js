@@ -31,25 +31,27 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
   var userId = req.user.id;
-  var myTools = req.body.myAppliances;
-  console.log('inside the server router myTools', myTools);
+  var allMyTools = req.body.myAppliances;
+  console.log('inside the server router returning all my selected appliance_id', allMyTools);
 
   pool.connect(function (conErr, client, done) {
     if (conErr) {
-      console.log('conErr');
       res.sendStatus(500);
     } else {
-      client.query('INSERT INTO users_appliances(user_id, appliance_id) VALUES($1, $2);', [userId, myTools.appliance_id],function (queryErr, resultObj) {
-        done();
-        if (queryErr) {
-          res.sendStatus(500);
-        } else {
-          res.send(resultObj.rows);
-        }
-      });
+      allMyTools.forEach(function (appliance_id) {
+        client.query('INSERT INTO users_appliances(user_id, appliance_id) VALUES($1, $2)',
+          [userId, appliance_id], function (queryErr, resultObj) {
+            done();
+            if (queryErr) {
+              res.sendStatus(500);
+            } else {
+              res.sendStatus(200);
+            }
+          });
+      })
     }
-  })
-});
+  });
 
+});
 
 module.exports = router;

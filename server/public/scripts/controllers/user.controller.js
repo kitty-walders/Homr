@@ -18,8 +18,10 @@ myApp.controller('UserController', function (UserService) {
     var selectedAppliances = (
       vm.appliancesObj.appliances.filter(function (appliance) {
         return appliance.isChecked;
-      })
+      }).map(function(appliance){return appliance.appliance_id})
     );
+    console.log('filtered and mapped', selectedAppliances);
+
     var myAppliances = {
       myAppliances: selectedAppliances,
     };

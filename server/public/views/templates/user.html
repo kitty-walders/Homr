@@ -4,8 +4,9 @@
     <h2><u>Intake Form</u></h2>
     <div ng-repeat="i in uc.appliancesObj.appliances">
         <md-switch ng-model="i.isChecked" class="md-primary">
-            Do you have a/an {{i.appliance_name}}?
+            Do you have a/an: {{i.appliance_name}}?
         </md-switch>
     </div>
-    <button ng-click="uc.submitForm()">Generate Homr Schedule</button>
+    <button ng-click="uc.submitForm()">Submit your appliances</button>
 </div>
+
