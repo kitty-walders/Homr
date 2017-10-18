@@ -16,6 +16,7 @@ router.post('/', function(req, res, next) {
 
   var saveUser = {
     username: req.body.username,
+    phone_number: req.body.phone_number,
     password: encryptLib.encryptPassword(req.body.password)
   };
   console.log('new user:', saveUser);
@@ -25,8 +26,8 @@ router.post('/', function(req, res, next) {
       console.log("Error connecting: ", err);
       res.sendStatus(500);
     }
-    client.query("INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id",
-      [saveUser.username, saveUser.password],
+    client.query("INSERT INTO users (username, phone_number, password) VALUES ($1, $2, $3) RETURNING id",
+      [saveUser.username, saveUser.phone_number, saveUser.password],
         function (err, result) {
           client.end();
 
