@@ -40,7 +40,13 @@ myApp.service('UserService', function($http, $location){
       })
       .then(function (res) {
         console.log('Service has working POST for myAppliances');
-        swal("Thanks for adding your appliances to Homr", "Beep Beep");
+        swal({
+          title: "Good job!",
+          text: "Thanks for adding your appliances to Homr",
+          icon: "success",
+          button: "cool beans!",
+        });
+        $location.path("/info");
       });
     }
 
