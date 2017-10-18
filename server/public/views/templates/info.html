@@ -1,5 +1,10 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="container">
-  <h1>hihi</h1>
-
+  <h1>
+      <u>My appliances and associated Tasks</u>
+  </h1>
+  <div ng-repeat="i in ic.myTasks.tasks">
+    Your i {{i}}      
+    Your task:{{i.task_name}}
+  </div>
 </div>

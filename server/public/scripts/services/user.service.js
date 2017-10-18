@@ -3,6 +3,7 @@ myApp.service('UserService', function($http, $location){
 
   self.userObject = {};
   self.appliancesObj = {appliances: []};
+  self.myTasks = {tasks: []};
 
     self.getuser = function(){
       $http({
@@ -29,6 +30,18 @@ myApp.service('UserService', function($http, $location){
           self.appliancesObj.appliances = res.data;
           console.log('in service and back from server', self.appliancesObj.appliances);
       });
+    }; 
+
+    self.getMyTasks = function () {
+      console.log('inside the SERVICE getMyApp');
+      $http({
+          method: 'GET',
+          url: '/tasks'
+      })
+      // .then(function(res) {
+      //     self.appliancesObj.appliances = res.data;
+      //     console.log('in service and back from server', self.appliancesObj.appliances);
+      // });
     }; 
 
     self.myAppliances = function (myAppliances) {
