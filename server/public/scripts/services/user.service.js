@@ -37,11 +37,10 @@ myApp.service('UserService', function($http, $location){
       $http({
           method: 'GET',
           url: '/tasks'
-      })
-      // .then(function(res) {
-      //     self.appliancesObj.appliances = res.data;
-      //     console.log('in service and back from server', self.appliancesObj.appliances);
-      // });
+      }).then(function(res) {
+          self.myTasks.tasks = res.data;
+          console.log('in service and back from server', self.myTasks.tasks);
+      });
     }; 
 
     self.myAppliances = function (myAppliances) {
