@@ -1,5 +1,5 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<div class="container">
+<div class="container" ng-init="uc.getAppliances();">
     <h1 id="welcome" class="lead">Welcome, {{uc.userObject.userName}}!</h1>
     <h2><u>Intake Form</u></h2>
     <div ng-repeat="i in uc.appliancesObj.appliances">

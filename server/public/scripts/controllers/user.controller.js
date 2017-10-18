@@ -11,8 +11,8 @@ myApp.controller('UserController', function (UserService) {
     console.log('inside controller getAppliances');
   };
 
-  //load all appliances from DB as part of Intake Form
-  vm.getAppliances();
+  // //load all appliances from DB as part of Intake Form
+  // vm.getAppliances();
 
   vm.submitForm = function () {
     var selectedAppliances = (
