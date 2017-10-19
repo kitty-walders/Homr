@@ -6,31 +6,35 @@
   </h1>
 
 <ang-accordion one-at-a-time="true" icon-position="right" close-icon-url="images/right-icon.png" open-icon-url="images/down-icon.png">
-  <collapsible-item item-title="Late Tasks">
-    <div ng-repeat="x in ic.myTasksObj.tasks">
+  <collapsible-item item-title="Late Tasks" id="late">
+    <hr>
+    <div ng-repeat="x in tc.myTasksObj.tasks">
         <h2><u>{{ x.task_name }}</u></h2>
         <p>{{x.task_description}}</p>
         <p>Frequency: Every {{x.freq_day}} days</p>
-        <button id="x.mytask_id">Completed</button>
+        <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete($index)">Mark Complete</md-button>
         <hr>
     </div>
   </collapsible-item>
-  <collapsible-item item-title="Approaching Tasks">
-    <div ng-repeat="x in ic.myTasksObj.tasks">
+  <!-- <collapsible-item item-title="Approaching Tasks" id="approaching">
+    <hr>
+    <div ng-repeat="x in tc.myTasksObj.tasks">
         <h2><u>{{ x.task_name }}</u></h2>
         <p>{{x.task_description}}</p>
         <p>Frequency: Every {{x.freq_day}} days</p>
-        <button id="x.mytask_id">Completed</button>
+        <md-button class="md-raised md-primary" id={{x.mytask_id}}>Mark Complete</md-button>
         <hr>
     </div>
   </collapsible-item>
   <collapsible-item item-title="Completed Tasks">
-    <div ng-repeat="x in ic.myTasksObj.tasks">
+    <hr>
+    <div ng-repeat="x in tc.myTasksObj.tasks">
       <h2><u>{{ x.task_name }}</u></h2>
       <p>{{x.task_description}}</p>
+      <p>Completed on: XXXXXXXXXXXXXXXXXXXX</p>
       <hr>
     </div>
-  </collapsible-item>
+  </collapsible-item> -->
 </ang-accordion>
 </div>
 </div>

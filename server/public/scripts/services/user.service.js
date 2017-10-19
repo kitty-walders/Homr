@@ -57,10 +57,31 @@ myApp.service('UserService', function($http, $location){
           icon: "success",
           button: "Go to Homr Tasks!",
         });
-        //redirect to the /info page after completed intake form
-        $location.path("/info");
+        //redirect to the /tasks page after completed intake form
+        $location.path("/tasks");
       });
-    }
+    };
+
+    self.markComplete = function(taskid){
+      console.log('marked as completed', taskid);
+      var mytaskid = {task_id: taskid};
+      //POST my completed tasks to the DB
+      $http({
+        method: "PUT",
+        url: '/tasks',
+        data: mytaskid
+      }).then(function(response) {
+        //after updating the completed task, do another GET Tasks
+        self.getMyTasks();
+
+        swal({
+          title: "WOW!",
+          text: "You're awesome!",
+          icon: "success",
+          button: "Do more tasks",
+        });
+      });
+    };
 
     self.logout = function() {
       $http({

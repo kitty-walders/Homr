@@ -5,10 +5,9 @@ var bodyParser = require('body-parser');
 
 router.get('/', function (req, res) {
   var userId = req.user.id;
-  console.log('inside /tasks GET route');
+
   // check if logged in
   if (req.isAuthenticated()) {
-    console.log('logged in user for tasks');
     pool.connect(function (conErr, client, done) {
       if (conErr) {
         res.sendStatus(500);
@@ -24,40 +23,37 @@ router.get('/', function (req, res) {
       }
     })
   } else {
-    console.log('not logged in');
     // should probably be res.sendStatus(403) and handled client-side, esp if this is an AJAX request (which is likely with AngularJS)
     res.send(false);
   }
 });
 
-// router.post('/', function (req, res) {
-//   var userId = req.user.id;
-//   var allMyTools = req.body.myAppliances;
-//   console.log('inside the server router returning all my selected appliance_id', allMyTools);
+router.put('/', function (req, res) {
+  var mytaskid = req.body.task_id;
+  console.log('inside the server router PUT', mytaskid);
 
-//   pool.connect(function (conErr, client, done) {
-//     var errorInLoop;
+  // check if logged in
+  if (req.isAuthenticated()) {
+    pool.connect(function (conErr, client, done) {
+      if (conErr) {
+        res.sendStatus(500);
+      } else {
+        client.query("UPDATE mytasks SET taskcompleted= 'TRUE', task_completion_date= CURRENT_TIMESTAMP WHERE mytask_id = $1", [mytaskid], function (queryErr, resultObj) {
+          done();
+          if (queryErr) {
+            res.sendStatus(500);
+          } else {
+            res.send(resultObj.rows);
+            console.log('WORKING?!?!?!?!');
+          }
+        });
+      }
+    })
+  } else {
+    // should probably be res.sendStatus(403) and handled client-side, esp if this is an AJAX request (which is likely with AngularJS)
+    res.send(false);
+  }
 
-//     if (conErr) {
-//       res.sendStatus(500);
-//     } else {
-//       allMyTools.forEach(function (appliance_id) {
-//         client.query('INSERT INTO users_appliances(user_id, appliance_id) VALUES($1, $2)',
-//           [userId, appliance_id], function (queryErr, resultObj) {
-//             done();
-//             errorInLoop = queryErr;
-//           });
-//       })
-
-//       if (errorInLoop) {
-//         res.sendStatus(500);
-//       } else {
-//         res.sendStatus(200);
-//         //successfully added all appliances to this user
-//       }
-//     }
-//   });
-
-// });
+});
 
 module.exports = router;
