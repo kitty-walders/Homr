@@ -3,7 +3,7 @@ myApp.service('UserService', function($http, $location){
 
   self.userObject = {};
   self.appliancesObj = {appliances: []};
-  self.myTasks = {tasks: []};
+  self.myTasksObj = {tasks: []};
 
     self.getuser = function(){
       $http({
@@ -28,36 +28,36 @@ myApp.service('UserService', function($http, $location){
           url: '/appliances'
       }).then(function(res) {
           self.appliancesObj.appliances = res.data;
-          console.log('in service and back from server', self.appliancesObj.appliances);
+          console.log('GET all appliances in DB', self.appliancesObj.appliances);
       });
     }; 
 
     self.getMyTasks = function () {
-      console.log('inside the SERVICE getMyApp');
       $http({
           method: 'GET',
           url: '/tasks'
       }).then(function(res) {
-          self.myTasks.tasks = res.data;
-          console.log('in service and back from server', self.myTasks.tasks);
+          self.myTasksObj.tasks = res.data;
+          console.log('in GET MY TASKS', self.myTasksObj);
       });
     }; 
 
     self.myAppliances = function (myAppliances) {
-      console.log('in the service of myAppliances', myAppliances);
+      console.log('GET MY appliances', myAppliances);
+      //POST my selected appliances to the DB
       $http({
         method: 'POST',
         url: '/appliances',
         data: myAppliances,
       })
       .then(function (res) {
-        console.log('Service has working POST for myAppliances');
         swal({
           title: "Good job!",
           text: "Thanks for adding your appliances to Homr",
           icon: "success",
-          button: "cool beans!",
+          button: "Go to Homr Tasks!",
         });
+        //redirect to the /info page after completed intake form
         $location.path("/info");
       });
     }

@@ -1,10 +1,36 @@
-<div ng-include="'views/partials/nav.html'" ng-controller="UserController as uc"></div>
+<div ng-include="'views/partials/nav.html'"></div>
+<!-- ng-controller="UserController as uc" -->
 <div class="container">
   <h1>
-      <u>My appliances and associated Tasks</u>
+    <u>Your tasks:</u>
   </h1>
-  <div ng-repeat="i in ic.myTasks.tasks">
-    Your i {{i}}      
-    Your task:{{i.task_name}}
-  </div>
+
+<ang-accordion one-at-a-time="true" icon-position="right" close-icon-url="images/right-icon.png" open-icon-url="images/down-icon.png">
+  <collapsible-item item-title="Late Tasks">
+    <div ng-repeat="x in ic.myTasksObj.tasks">
+        <h2><u>{{ x.task_name }}</u></h2>
+        <p>{{x.task_description}}</p>
+        <p>Frequency: Every {{x.freq_day}} days</p>
+        <button id="x.mytask_id">Completed</button>
+        <hr>
+    </div>
+  </collapsible-item>
+  <collapsible-item item-title="Approaching Tasks">
+    <div ng-repeat="x in ic.myTasksObj.tasks">
+        <h2><u>{{ x.task_name }}</u></h2>
+        <p>{{x.task_description}}</p>
+        <p>Frequency: Every {{x.freq_day}} days</p>
+        <button id="x.mytask_id">Completed</button>
+        <hr>
+    </div>
+  </collapsible-item>
+  <collapsible-item item-title="Completed Tasks">
+    <div ng-repeat="x in ic.myTasksObj.tasks">
+      <h2><u>{{ x.task_name }}</u></h2>
+      <p>{{x.task_description}}</p>
+      <hr>
+    </div>
+  </collapsible-item>
+</ang-accordion>
+</div>
 </div>

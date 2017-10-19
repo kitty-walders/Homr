@@ -13,7 +13,7 @@ router.get('/', function (req, res) {
       if (conErr) {
         res.sendStatus(500);
       } else {
-        client.query('XXXXXXXXXXXXXXXXXXXX', function (queryErr, resultObj) {
+        client.query('SELECT * FROM tasks INNER JOIN mytasks ON mytasks.task_id = tasks.task_id INNER JOIN users_appliances ON users_appliances.usersapp_id= mytasks.usersapp_id WHERE user_id = $1', [userId], function (queryErr, resultObj) {
           done();
           if (queryErr) {
             res.sendStatus(500);

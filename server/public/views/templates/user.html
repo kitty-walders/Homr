@@ -1,6 +1,7 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="container" ng-init="uc.getAppliances()">
     <h1 id="welcome" class="lead">Welcome, {{uc.userObject.userName}}!</h1>
+
     <h1>
         <u>Intake Form</u>
     </h1>
@@ -9,5 +10,8 @@
             Do you have a/an: {{i.appliance_name}}?
         </md-switch>
     </div>
+    <!-- Wait for all toggles to be selected before submitting form -->
     <button ng-click="uc.submitForm()">Submit your appliances</button>
+
+    
 </div>
