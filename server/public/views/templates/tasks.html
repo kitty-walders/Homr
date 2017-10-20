@@ -11,6 +11,7 @@
         <h2><u>{{ x.task_name }}</u></h2>
         <p>{{x.task_description}}</p>
         <p>Frequency: Every {{x.freq_day}} days</p>
+        <p>Task Created on: {{x.task_creation_date}}</p>
         <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete($index)">Mark Complete</md-button>
         <hr>
     </div>
@@ -21,6 +22,7 @@
         <h2><u>{{ x.task_name }}</u></h2>
         <p>{{x.task_description}}</p>
         <p>Frequency: Every {{x.freq_day}} days</p>
+        <p>Task Created on: {{x.task_creation_date}}</p>
         <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete($index)">Mark Complete</md-button>
         <hr>
     </div>
@@ -30,6 +32,7 @@
     <div ng-repeat="x in tc.myTasksObj.tasks" ng-show="x.taskcompleted">
       <h2><u>{{ x.task_name }}</u></h2>
       <p>{{x.task_description}}</p>
+      <p>Task Created on: {{x.task_creation_date}}</p>
       <p>Completed on: {{ x.task_completion_date }}</p>
       <hr>
     </div>

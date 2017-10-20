@@ -1,17 +1,23 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<div class="container" ng-init="uc.getAppliances()">
+<div class="container" ng-init="uc.getAppliances(); uc.getAllTasks()">
     <h1 id="welcome" class="lead">Welcome, {{uc.userObject.userName}}!</h1>
-
     <h1>
         <u>Intake Form</u>
     </h1>
-    <div ng-repeat="i in uc.appliancesObj.appliances">
-        <md-switch ng-model="i.isChecked" class="md-primary">
-            Do you have a/an: {{i.appliance_name}}?
-        </md-switch>
-    </div>
-    <!-- Wait for all toggles to be selected before submitting form -->
-    <button ng-click="uc.submitForm()">Submit your appliances</button>
-
+    <ang-accordion icon-position="right" close-icon-url="images/right-icon.png" open-icon-url="images/down-icon.png">
+        <collapsible-item ng-repeat="i in uc.appliancesObj.appliances" item-title="{{i.appliance_name}}"><md-switch ng-model="i.isChecked" class="md-primary" aria-label="{{i.appliance_name}}"></md-switch>
+          <hr>
+          <div>hi</div>
+          <div ng-repeat="x in uc.allTasksObj.tasks">
+              <h2><u>{{ x.task_name }}</u></h2>
+              <p>{{x.task_description}}</p>
+              <p>Frequency: Every {{x.freq_day}} days</p>
+              <p>Task Created on: {{x.task_creation_date}}</p>
+              <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete($index)">Mark Complete</md-button>
+          </div>
+        </collapsible-item>
+      </ang-accordion>
     
+        <!-- Wait for all toggles to be selected before submitting form -->
+        <button ng-click="uc.submitForm()">Submit your appliances</button>
 </div>

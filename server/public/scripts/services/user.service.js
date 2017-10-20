@@ -4,6 +4,7 @@ myApp.service('UserService', function($http, $location){
   self.userObject = {};
   self.appliancesObj = {appliances: []};
   self.myTasksObj = {tasks: []};
+  self.allTasksObj = {tasks: []};
 
     self.getuser = function(){
       $http({
@@ -41,6 +42,17 @@ myApp.service('UserService', function($http, $location){
           console.log('in GET MY TASKS', self.myTasksObj);
       });
     }; 
+
+    self.getAllTasks = function(){
+      console.log('inside the GET ALL TASK SERVICE')
+      $http({
+        method: 'GET',
+        url: '/intake'
+    }).then(function(res) {
+        self.allTasksObj.tasks = res.data;
+        console.log('in GET ALL TASKS', self.myTasksObj);
+    });
+    }
 
     self.myAppliances = function (myAppliances) {
       console.log('GET MY appliances', myAppliances);

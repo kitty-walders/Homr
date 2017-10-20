@@ -4,6 +4,7 @@ myApp.controller('UserController', function (UserService) {
   vm.userService = UserService;
   vm.userObject = UserService.userObject;
   vm.appliancesObj = UserService.appliancesObj;
+  vm.allTasksObj = UserService.allTasksObj;
 
   //get all appliances in DB to the DOM
   vm.getAppliances = function () {
@@ -24,7 +25,13 @@ myApp.controller('UserController', function (UserService) {
       myAppliances: selectedAppliances,
     };
     UserService.myAppliances(myAppliances);
-  }
+  };
+
+    //get ALL tasks from DB to the DOM
+    vm.getAllTasks = function () {
+      UserService.getAllTasks();
+    };
+    vm.getAllTasks();
 });
 
   
