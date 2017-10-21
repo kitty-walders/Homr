@@ -5,6 +5,7 @@ myApp.service('UserService', function($http, $location){
   self.appliancesObj = {appliances: []};
   self.myTasksObj = {tasks: []};
   self.allTasksObj = {tasks: []};
+  self.myRelTasksObj = {tasks: []};
 
     self.getuser = function(){
       $http({
@@ -16,61 +17,86 @@ myApp.service('UserService', function($http, $location){
               self.userObject.userName = response.data.username;
               // console.log('UserService -- getuser -- User Data: ', self.userObject.userName);
           } else {
-              console.log('UserService -- getuser -- failure');
               // user has no session, bounce them back to the login page
               $location.path("/home");
           }
       })
     };
 
-    self.getAppliances = function () {
+    self.getAppliances = function () {  
       $http({
           method: 'GET',
           url: '/appliances'
       }).then(function(res) {
           self.appliancesObj.appliances = res.data;
-          console.log('GET all appliances in DB', self.appliancesObj.appliances);
+
       });
     }; 
 
-    self.getMyTasks = function () {
+    self.genHomr = function () {
+      console.log('inside the genHomr');
       $http({
-          method: 'GET',
-          url: '/tasks'
-      }).then(function(res) {
+        method:'GET',
+        url:'/homr'
+      })
+      .then(function(res) {
+          $location.path("/tasks");
           self.myTasksObj.tasks = res.data;
           console.log('in GET MY TASKS', self.myTasksObj);
       });
     }; 
 
+    self.getRelevantTasks=function(){
+      $http({
+        method: 'GET',
+        url: '/tasks'
+    }).then(function(res) {
+        self.myRelTasksObj.tasks = res.data;
+    });
+      };
+
     self.getAllTasks = function(){
-      console.log('inside the GET ALL TASK SERVICE')
       $http({
         method: 'GET',
         url: '/intake'
     }).then(function(res) {
         self.allTasksObj.tasks = res.data;
-        console.log('in GET ALL TASKS', self.myTasksObj);
     });
+    };
+
+    self.gatherDate = function(taskdate){
+      console.log('inside gatherDate SERVICE', taskdate);
+      
+      $http({
+        method: 'POST',
+        url: '/intake',
+        data: taskdate,
+      }).then(function(res){
+        console.log('response from server', res);
+
+      })
     }
 
-    self.myAppliances = function (myAppliances) {
-      console.log('GET MY appliances', myAppliances);
-      //POST my selected appliances to the DB
+    self.gatherAppliances = function (myAppliance) {
+      console.log('SERVICE myAppliance', myAppliance);
+
+      // POST my selected appliances to the DB
       $http({
         method: 'POST',
         url: '/appliances',
-        data: myAppliances,
+        data: myAppliance,
       })
       .then(function (res) {
-        swal({
-          title: "Good job!",
-          text: "Thanks for adding your appliances to Homr",
-          icon: "success",
-          button: "Go to Homr Tasks!",
-        });
-        //redirect to the /tasks page after completed intake form
-        $location.path("/tasks");
+        console.log('added an appliance');
+        self.getRelevantTasks();
+        // swal({
+        //   title: "Good job!",
+        //   text: "Thanks for adding your appliances to Homr",
+        //   icon: "success",
+        //   button: "Go to Homr Tasks!",
+        // });
+        // //redirect to the /user page after completed intake form
+        // $location.path("/user");
       });
     };
 
@@ -83,8 +109,7 @@ myApp.service('UserService', function($http, $location){
         url: '/tasks',
         data: mytaskid
       }).then(function(response) {
-        //after updating the completed task, do another GET Tasks
-        self.getMyTasks();
+
 
         swal({
           title: "WOW!",

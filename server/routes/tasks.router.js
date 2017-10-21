@@ -3,21 +3,25 @@ var router = express.Router();
 var pool = require('../modules/pool.js');
 var bodyParser = require('body-parser');
 
+//based on user's appliance selection, select all relevant tasks for each appliance
 router.get('/', function (req, res) {
   var userId = req.user.id;
-
+  console.log('task router userId', userId);
   // check if logged in
   if (req.isAuthenticated()) {
     pool.connect(function (conErr, client, done) {
       if (conErr) {
         res.sendStatus(500);
+        console.log('task router conErr', conErr);
       } else {
-        client.query('SELECT * FROM tasks INNER JOIN mytasks ON mytasks.task_id = tasks.task_id INNER JOIN users_appliances ON users_appliances.usersapp_id= mytasks.usersapp_id WHERE user_id = $1', [userId], function (queryErr, resultObj) {
+        client.query('SELECT * FROM users_appliances INNER JOIN tasks ON tasks.appliance_id = users_appliances.appliance_id WHERE user_id = $1', [userId], function (queryErr, resultObj) {
           done();
           if (queryErr) {
             res.sendStatus(500);
+            console.log('task router queryErr', queryErr);
           } else {
             res.send(resultObj.rows);
+            console.log('task router resultObj.rows', resultObj.rows);
           }
         });
       }
@@ -27,7 +31,6 @@ router.get('/', function (req, res) {
     res.send(false);
   }
 });
-
 
 router.put('/', function (req, res) {
   var mytaskid = req.body.task_id;
@@ -44,8 +47,7 @@ router.put('/', function (req, res) {
           if (queryErr) {
             res.sendStatus(500);
           } else {
-            res.send(resultObj.rows);
-            console.log('WORKING?!?!?!?!');
+            res.sendStatus(200)
           }
         });
       }

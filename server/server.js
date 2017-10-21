@@ -12,6 +12,7 @@ var registerRouter = require('./routes/register.router');
 var appliancesRouter = require('./routes/appliances.router');
 var tasksRouter = require('./routes/tasks.router');
 var intakeRouter = require('./routes/intake.router');
+var homrRouter = require('./routes/homr.router');
 
 var port = process.env.PORT || 5000;
 
@@ -35,6 +36,7 @@ app.use('/user', userRouter);
 app.use('/appliances', appliancesRouter);
 app.use('/tasks', tasksRouter);
 app.use('/intake', intakeRouter);
+app.use('/homr', homrRouter);
 
 
 // Catch all bucket, must be last!
