@@ -4,28 +4,24 @@
     <h1>
         <u>Intake Form</u>
     </h1>
-        <!-- <div ng-repeat="i in uc.appliancesObj.appliances">
-            <md-switch ng-model="i.isChecked" ng-change="uc.gatherAppliances(i)"class="md-primary">
-                Do you have a/an: {{i.appliance_name}}?
-            </md-switch>
-        </div> -->
-
-
-        <ang-accordion one-at-a-time="true" ng-repeat="i in uc.appliancesObj.appliances">
-            <collapsible-item item-title="{{i.appliance_name}}">
-                <md-switch ng-model="i.isChecked" ng-change="uc.gatherAppliances(i)" class="md-primary" aria-label="{{i.appliance_name}}"></md-switch>
-              <div ng-show="i.isChecked">
+    <ang-accordion one-at-a-time="true" ng-repeat="i in uc.appliancesObj.appliances">
+        <collapsible-item item-title="{{i.appliance_name}}">
+            <md-switch ng-model="i.isChecked" ng-change="uc.gatherAppliances(i)" class="md-primary" aria-label="{{i.appliance_name}}"></md-switch>
+            <div ng-show="i.isChecked">
                 <div ng-repeat="x in uc.myRelTasksObj.tasks" ng-if="x.appliance_id == i.appliance_id">
                     <hr>
-                    <h2><u>{{ x.task_name }}</u></h2>
+                    <h2>
+                        <u>{{ x.task_name }}</u>
+                    </h2>
                     <p>{{x.task_description}}</p>
-                    <p>When did you last {{ x.task_name }}? 
-                        <md-datepicker ng-model="x.task_firstcompleteddate" ng-change="uc.gatherDate(x)"md-placeholder="Enter date"></md-datepicker>
+                    <p>When did you last {{ x.task_name }}?
+                        <md-datepicker ng-model="x.task_firstcompleteddate" ng-change="uc.gatherDate(x)" md-placeholder="Enter date"></md-datepicker>
                     </p>
+                    <input type="button" value="Upload" ng-click="tc.showPicker()">
                 </div>
             </div>
-            </collapsible-item>
-          </ang-accordion>
-          <md-button ng-click="uc.genHomr()" class="md-raised md-primary">Generate your Homr Schedule!</md-button>
-    </div>
+        </collapsible-item>
+    </ang-accordion>
+    <md-button ng-click="uc.genHomr()" class="md-raised md-primary">Generate your Homr Schedule!</md-button>
+</div>
 </div>

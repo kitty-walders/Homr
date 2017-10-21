@@ -6,7 +6,7 @@ myApp.controller('TasksController', function (UserService) {
   vm.allTasksObj = UserService.allTasksObj;
 
 
-  vm.genHomr = function(){
+  vm.genHomr = function () {
     UserService.genHomr();
   }
 

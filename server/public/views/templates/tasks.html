@@ -4,40 +4,49 @@
     <u>Your tasks:</u>
   </h1>
 
-<ang-accordion one-at-a-time="true" >
-  <collapsible-item item-title="Late Tasks" id="late">
-    <hr>
-    <div ng-repeat="x in tc.myTasksObj.tasks">
-        <h2><u>{{ x.task_name }}</u></h2>
+  <ang-accordion one-at-a-time="true">
+    <collapsible-item item-title="Late Tasks" id="late">
+      <hr>
+      <div ng-repeat="x in tc.myTasksObj.tasks">
+        <h2>
+          <u>{{ x.task_name }}</u>
+        </h2>
+        <p>What is this: {{x.mytask_id}}</p>
         <p>{{x.task_description}}</p>
         <p>Frequency: Every {{x.freq_day}} days</p>
         <p>Task Created on: {{x.task_creation_date}}</p>
         <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete($index)">Mark Complete</md-button>
         <hr>
-    </div>
-  </collapsible-item>
-  <collapsible-item item-title="Approaching Tasks" id="approaching" >
-    <hr>
-    <div ng-repeat="x in tc.myTasksObj.tasks">
-        <h2><u>{{ x.task_name }}</u></h2>
+      </div>
+    </collapsible-item>
+    <collapsible-item item-title="Approaching Tasks" id="approaching">
+      <hr>
+      <div ng-repeat="x in tc.myTasksObj.tasks">
+        <h2>
+          <u>{{ x.task_name }}</u>
+        </h2>
         <p>What is this: {{x.mytask_id}}</p>
         <p>{{x.task_description}}</p>
         <p>Frequency: Every {{x.freq_day}} days</p>
         <p>Task Created on: {{x.task_creation_date}}</p>
         <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete(x.mytask_id)">Mark Complete</md-button>
         <hr>
-    </div>
-  </collapsible-item>
-  <collapsible-item item-title="Completed Tasks">
-    <hr>
-    <div ng-repeat="x in tc.myTasksObj.tasks">
-      <h2><u>{{ x.task_name }}</u></h2>
-      <p>{{x.task_description}}</p>
-      <p>Task Created on: {{x.task_creation_date}}</p>
-      <p>Completed on:{{x.firstcompleteddate}} {{ x.task_completion_date }}</p>
+      </div>
+    </collapsible-item>
+    <collapsible-item item-title="Completed Tasks">
       <hr>
-    </div>
-  </collapsible-item>
-</ang-accordion>
+      <div ng-repeat="x in tc.myTasksObj.tasks">
+        <h2>
+          <u>{{ x.task_name }}</u>
+        </h2>
+        <p>What is this: {{x.mytask_id}}</p>
+        <p>{{x.task_description}}</p>
+        <p>Task Created on: {{x.task_creation_date}}</p>
+        <p ng-if="x.task_completion_date == NULL">Completed on: {{x.firstcompleteddate}}</p>
+        <p ng-if="x.task_completion_date">Completed with Hområ: {{x.task_completion_date}}</p>
+        <hr>
+      </div>
+    </collapsible-item>
+  </ang-accordion>
 </div>
 </div>

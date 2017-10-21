@@ -35,5 +35,9 @@ myApp.controller('UserController', function (UserService, $location) {
     $location.path("/tasks");
   }
 
+  vm.showPicker = function(task){
+    UserService.showPicker(task);
+  }
+
 });
 
