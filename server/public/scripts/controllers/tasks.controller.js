@@ -10,8 +10,7 @@ myApp.controller('TasksController', function (UserService) {
     UserService.genHomr();
   }
 
-  vm.markComplete = function (index) {
-    var mytaskid = (index + 1)
+  vm.markComplete = function (mytaskid) {
     console.log('mytaskid', mytaskid);
     UserService.markComplete(mytaskid);
   };

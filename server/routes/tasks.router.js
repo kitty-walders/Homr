@@ -33,7 +33,7 @@ router.get('/', function (req, res) {
 });
 
 router.put('/', function (req, res) {
-  var mytaskid = req.body.task_id;
+  var mytaskid = req.body.mytask_id;
   console.log('inside the server router PUT', mytaskid);
 
   // check if logged in

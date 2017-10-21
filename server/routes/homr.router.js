@@ -30,31 +30,4 @@ router.get('/', function (req, res) {
   }
 });
 
-// router.put('/', function (req, res) {
-//   var mytaskid = req.body.task_id;
-//   console.log('inside the server router PUT', mytaskid);
-
-//   // check if logged in
-//   if (req.isAuthenticated()) {
-//     pool.connect(function (conErr, client, done) {
-//       if (conErr) {
-//         res.sendStatus(500);
-//       } else {
-//         client.query("UPDATE mytasks SET taskcompleted= 'TRUE', task_completion_date= CURRENT_TIMESTAMP WHERE mytask_id = $1", [mytaskid], function (queryErr, resultObj) {
-//           done();
-//           if (queryErr) {
-//             res.sendStatus(500);
-//           } else {
-//             res.sendStatus(200);
-//           }
-//         });
-//       }
-//     })
-//   } else {
-//     // should probably be res.sendStatus(403) and handled client-side, esp if this is an AJAX request (which is likely with AngularJS)
-//     res.send(false);
-//   }
-
-// });
-
 module.exports = router;

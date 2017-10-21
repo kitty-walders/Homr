@@ -1,4 +1,4 @@
-myApp.controller('UserController', function (UserService) {
+myApp.controller('UserController', function (UserService, $location) {
 
   var vm = this;
   vm.userService = UserService;
@@ -32,7 +32,7 @@ myApp.controller('UserController', function (UserService) {
   };
 
   vm.genHomr = function(){
-    UserService.genHomr();
+    $location.path("/tasks");
   }
 
 });

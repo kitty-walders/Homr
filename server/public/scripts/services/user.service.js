@@ -40,9 +40,7 @@ myApp.service('UserService', function($http, $location){
         url:'/homr'
       })
       .then(function(res) {
-          $location.path("/tasks");
           self.myTasksObj.tasks = res.data;
-          console.log('in GET MY TASKS', self.myTasksObj);
       });
     }; 
 
@@ -102,15 +100,14 @@ myApp.service('UserService', function($http, $location){
 
     self.markComplete = function(taskid){
       console.log('marked as completed', taskid);
-      var mytaskid = {task_id: taskid};
+      var mytaskid = {mytask_id: taskid};
       //POST my completed tasks to the DB
       $http({
         method: "PUT",
         url: '/tasks',
         data: mytaskid
       }).then(function(response) {
-
-
+        self.genHomr();
         swal({
           title: "WOW!",
           text: "You're awesome!",
