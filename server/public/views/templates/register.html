@@ -1,21 +1,36 @@
 <div class="container">
-  <h1 class="lead">Register User</h1>
-  <h1 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h2>
-  <form ng-submit="lc.registerUser()">
-    <div>
-        <label for="username">Email:</label>
-        <input type="email" ng-model="lc.user.username" />
-    </div>
-    <div>
-        <label for="phone_number">Phone Number:</label>
-        <input type="tel" ng-model="lc.user.phone_number" />
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" ng-model="lc.user.password" />
-    </div>
-    <input class="btn btn-default" type="submit" name="submit" value="Register" />
-    <a href="#home">Cancel</a>
-  </form>
+    <md-card>
+        <md-card-content layout="row" layout-align="center center" layout-xs="column">
+            <div flex class="md-media-xl card-media">
+                <img src="https://www.birchcommunityservices.org/wp-content/uploads/2014/07/abcc.png" class="md-card-image" alt="house tools"/>
+            </div>
+            <div flex>
+                    <h1 class="lead">Register User</h1>
+                    <h1 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h2>
+                <md-card-actions layout="column" layout-padding ng-cloak>
+                        <md-content class="md-no-momentum">
+                            <md-input-container class="md-block">
+                                <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+                                <input ng-model="lc.user.username" type="email" placeholder="Email (required)" ng-required="true">
+                                </md-input-container>
+                            
+                            <md-input-container class="md-block">
+                                    <md-icon md-svg-src="img/icons/ic_phone_24px.svg" class="phone"></md-icon>
+                                    <input ng-model="lc.user.phone_number" type="tel" placeholder="Phone">
+                                    </md-input-container>
 
+                            <md-input-container class="md-block">
+                                    <!-- Use floating placeholder instead of label -->
+                                    <md-icon md-svg-src="img/icons/ic_account_box_24px.svg" class="password"></md-icon>
+                                    <input ng-model="lc.user.password" type="password" placeholder="Password (required)" ng-required="true">
+                                    </md-input-container>
+                            
+                            <md-button class="md-raised md-primary" type="submit" name="submit" value="Register" aria-label="Register" ng-click="lc.registerUser()">Register</md-button>
+                            <md-button a href="#home" class="md-raised" type="cancel" name="cancel" value="cancel" aria-label="Cancel Registration">Cancel</md-button>
+                        </md-content>
+
+                </md-card-actions>
+            </div>
+        </md-card-content>
+    </md-card>
 </div>
