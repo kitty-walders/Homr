@@ -3,25 +3,21 @@ var router = express.Router();
 var pool = require('../modules/pool.js');
 var bodyParser = require('body-parser');
 
-//based on user's appliance selection, select all relevant tasks for each appliance
+//For each selected appliance, GET the associated tasks so user can enter firstcompleteddate
 router.get('/', function (req, res) {
   var userId = req.user.id;
-  console.log('task router userId', userId);
   // check if logged in
   if (req.isAuthenticated()) {
     pool.connect(function (conErr, client, done) {
       if (conErr) {
         res.sendStatus(500);
-        console.log('task router conErr', conErr);
       } else {
         client.query('SELECT * FROM users_appliances INNER JOIN tasks ON tasks.appliance_id = users_appliances.appliance_id WHERE user_id = $1', [userId], function (queryErr, resultObj) {
           done();
           if (queryErr) {
             res.sendStatus(500);
-            console.log('task router queryErr', queryErr);
           } else {
             res.send(resultObj.rows);
-            console.log('task router resultObj.rows', resultObj.rows);
           }
         });
       }
@@ -34,13 +30,13 @@ router.get('/', function (req, res) {
 
 router.put('/', function (req, res) {
   var mytaskid = req.body.mytask_id;
-  console.log('inside the server router PUT', mytaskid);
 
   // check if logged in
   if (req.isAuthenticated()) {
     pool.connect(function (conErr, client, done) {
       if (conErr) {
         res.sendStatus(500);
+ 
       } else {
         client.query("UPDATE mytasks SET taskcompleted= 'TRUE', task_completion_date= CURRENT_TIMESTAMP WHERE mytask_id = $1", [mytaskid], function (queryErr, resultObj) {
           done();

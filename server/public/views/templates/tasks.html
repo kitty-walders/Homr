@@ -15,7 +15,7 @@
         <p>{{x.task_description}}</p>
         <p>Frequency: Every {{x.freq_day}} days</p>
         <p>Task Created on: {{x.task_creation_date}}</p>
-        <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete($index)">Mark Complete</md-button>
+        <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete(x.mytask_id)">Mark Complete</md-button>
         <hr>
       </div>
     </collapsible-item>

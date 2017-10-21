@@ -5,7 +5,6 @@ myApp.controller('UserController', function (UserService, $location) {
   vm.userObject = UserService.userObject;
   vm.appliancesObj = UserService.appliancesObj;
   vm.myRelTasksObj = UserService.myRelTasksObj;
-  vm.allTasksObj = UserService.allTasksObj;
   vm.myTasksObj = UserService.myTasksObj;
 
   //send User's intake task date to the DB
@@ -13,11 +12,9 @@ myApp.controller('UserController', function (UserService, $location) {
     UserService.gatherDate(taskdate);
   };
 
-  //get all appliances in DB to the DOM
+  //on page load, GET all appliances from DB to the DOM to allow users to pick their appliances
   vm.getAppliances = function () {
     UserService.getAppliances();
-    // swal("Let's get started with Homr!", 
-    // "First things first. Fill out our intake form to start generating your Homr schedule!");
   };
 
   //get ALL tasks from DB to the DOM
@@ -31,10 +28,12 @@ myApp.controller('UserController', function (UserService, $location) {
 
   };
 
+  //on button click- redirect users to /tasks
   vm.genHomr = function(){
     $location.path("/tasks");
   }
 
+  //allow user to upload images
   vm.showPicker = function(task){
     UserService.showPicker(task);
   }

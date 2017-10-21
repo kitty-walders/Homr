@@ -10,16 +10,13 @@ router.get('/', function (req, res) {
     pool.connect(function (conErr, client, done) {
       if (conErr) {
         res.sendStatus(500);
-        console.log('task router conErr', conErr);
       } else {
         client.query('SELECT * FROM users_appliances INNER JOIN mytasks ON mytasks.usersapp_id = users_appliances.usersapp_id WHERE user_id = $1', [userId], function (queryErr, resultObj) {
           done();
           if (queryErr) {
             res.sendStatus(500);
-            console.log('task router queryErr', queryErr);
           } else {
             res.send(resultObj.rows);
-            console.log('task router resultObj.rows', resultObj.rows);
           }
         });
       }

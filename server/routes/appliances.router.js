@@ -4,10 +4,9 @@ var pool = require('../modules/pool.js');
 var bodyParser = require('body-parser');
 
 router.get('/', function (req, res) {
-  console.log('inside /appliances GET route');
+  //on page load, GET all appliances from DB to the DOM to allow users to pick their appliances
   // check if logged in
   if (req.isAuthenticated()) {
-    console.log('logged in user for appliances');
     pool.connect(function (conErr, client, done) {
       if (conErr) {
         res.sendStatus(500);
@@ -23,7 +22,6 @@ router.get('/', function (req, res) {
       }
     })
   } else {
-    console.log('not logged in');
     // should probably be res.sendStatus(403) and handled client-side, esp if this is an AJAX request (which is likely with AngularJS)
     res.send(false);
   }
@@ -32,7 +30,6 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res) {
   var userId = req.user.id;
   var appliance_id = req.body.appliance_id;
-  console.log('inside the server router appliance_id', appliance_id);
 
   pool.connect(function (conErr, client, done) {
     if (conErr) {

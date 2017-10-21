@@ -4,7 +4,6 @@ myApp.service('UserService', function ($http, $location) {
   self.userObject = {};
   self.appliancesObj = { appliances: [] };
   self.myTasksObj = { tasks: [] };
-  self.allTasksObj = { tasks: [] };
   self.myRelTasksObj = { tasks: [] };
 
   self.getuser = function () {
@@ -15,7 +14,6 @@ myApp.service('UserService', function ($http, $location) {
       if (response.data.username) {
         // user has a current session on the server
         self.userObject.userName = response.data.username;
-        // console.log('UserService -- getuser -- User Data: ', self.userObject.userName);
       } else {
         // user has no session, bounce them back to the login page
         $location.path("/home");
@@ -24,12 +22,12 @@ myApp.service('UserService', function ($http, $location) {
   };
 
   self.getAppliances = function () {
+    //on page load, GET all appliances from DB to the DOM to allow users to pick their appliances
     $http({
       method: 'GET',
       url: '/appliances'
     }).then(function (res) {
       self.appliancesObj.appliances = res.data;
-
     });
   };
 
@@ -44,6 +42,7 @@ myApp.service('UserService', function ($http, $location) {
   };
 
   self.getRelevantTasks = function () {
+    //For each selected appliance, GET the associated tasks so user can enter firstcompleteddate
     $http({
       method: 'GET',
       url: '/tasks'
@@ -52,18 +51,7 @@ myApp.service('UserService', function ($http, $location) {
     });
   };
 
-  self.getAllTasks = function () {
-    $http({
-      method: 'GET',
-      url: '/intake'
-    }).then(function (res) {
-      self.allTasksObj.tasks = res.data;
-    });
-  };
-
   self.gatherDate = function (taskdate) {
-    console.log('inside gatherDate SERVICE', taskdate);
-
     $http({
       method: 'POST',
       url: '/intake',
@@ -75,30 +63,20 @@ myApp.service('UserService', function ($http, $location) {
   }
 
   self.gatherAppliances = function (myAppliance) {
-    console.log('SERVICE myAppliance', myAppliance);
-
-    // POST my selected appliances to the DB
+    // POST my selected appliance to the DB
     $http({
       method: 'POST',
       url: '/appliances',
       data: myAppliance,
     })
       .then(function (res) {
-        console.log('added an appliance');
+        //For each selected appliance, GET the associated tasks so user can enter firstcompleteddate
         self.getRelevantTasks();
-        // swal({
-        //   title: "Good job!",
-        //   text: "Thanks for adding your appliances to Homr",
-        //   icon: "success",
-        //   button: "Go to Homr Tasks!",
-        // });
-        // //redirect to the /user page after completed intake form
-        // $location.path("/user");
       });
   };
 
   self.markComplete = function (taskid) {
-    console.log('marked as completed', taskid);
+    console.log('marked as completedSERVICE', taskid);
     var mytaskid = { mytask_id: taskid };
     //POST my completed tasks to the DB
     $http({
@@ -117,7 +95,11 @@ myApp.service('UserService', function ($http, $location) {
   };
 
   self.showPicker = function(task){
-    console.log('showPicker button working to service')
+    console.log('showPicker button working to service');
+    // var client = filestack.init('	AJEHYT3XfQHOk875kYhHiz');
+    // client.pick({accept: 'image/*',
+    // maxFiles: 5,
+    // imageMax: [1024, 1024]});
   }
 
   self.logout = function () {
