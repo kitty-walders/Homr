@@ -85,21 +85,46 @@ myApp.service('UserService', function ($http, $location) {
       data: mytaskid
     }).then(function (response) {
       self.genHomr();
+      self.genNextTask();
       swal({
         title: "WOW!",
         text: "You're awesome!",
         icon: "success",
-        button: "Do more tasks",
+        button: "Do more tasks"
       });
     });
   };
 
+  self.genNextTask = function (task) {
+    console.log('marked as genNextTask');
+    var myNewTask = {
+      newTask: task
+    }
+    console.log('myNewTask', myNewTask);
+    // $http({
+    //   method: 'POST',
+    //   url: '/tasks',
+    //   data: z
+    // })
+    //   .then(function (res) {
+    //     console.log('response from genNextTask', res);
+    //   });
+  };
+
   self.showPicker = function(task){
     console.log('showPicker button working to service');
+
     // var client = filestack.init('	AJEHYT3XfQHOk875kYhHiz');
     // client.pick({accept: 'image/*',
     // maxFiles: 5,
     // imageMax: [1024, 1024]});
+
+    //PUT task image link as part of 
+    // $http({
+    //   method: "PUT",
+    //   url: '/filestack',
+    //   data: task
+    // })
   }
 
   self.logout = function () {

@@ -1,45 +1,30 @@
 <div class="container">
- 
-    <!-- <form ng-submit="lc.login()">
-      <div>
-          <label for="username">Email:</label>
-          <input type="text" ng-model="lc.user.username" />
-      </div>
-      <div>
-          <label for="password">Password:</label>
-          <input type="password" ng-model="lc.user.password" />
-      </div>
-    </form>
-</div> -->
-
-<div class="container">
-        <md-card>
-            <md-card-content layout="row" layout-align="center center" layout-xs="column">
-                <div flex class="md-media-xl card-media">
-                    <img src="https://www.birchcommunityservices.org/wp-content/uploads/2014/07/abcc.png" class="md-card-image" alt="house tools"/>
-                </div>
-                <div flex>
-                        <h1 class="lead">Login</h1>
-                        <h1 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h2>
+    <md-card>
+        <md-card-content layout="row" layout-align="center center" layout-xs="column">
+            <div flex class="parent">
+                <img src="https://www.birchcommunityservices.org/wp-content/uploads/2014/07/abcc.png" class="card" alt="house tools" />
+            </div>
+            <div flex>
+                <h1 class="lead">Login</h1>
+                <h1 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h2>
                     <md-card-actions layout="column" layout-padding ng-cloak>
-                            <md-content class="md-no-momentum">
-                                <md-input-container class="md-block">
-                                    <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
-                                    <input ng-model="lc.user.username" type="text" placeholder="Email (required)" ng-required="true">
-                                    </md-input-container>
-    
-                                <md-input-container class="md-block">
-                                        <!-- Use floating placeholder instead of label -->
-                                        <md-icon md-svg-src="img/icons/ic_account_box_24px.svg" class="password"></md-icon>
-                                        <input ng-model="lc.user.password" type="password" placeholder="Password (required)" ng-required="true">
-                                        </md-input-container>
-                                
-                                <md-button class="md-raised md-primary" type="submit" name="submit" value="Log In" aria-label="Log In" ng-click="lc.login()">Log In</md-button>
-                                <md-button a href="#register" class="md-raised" type="register" name="register" value="register" aria-label="Register">Register</a></md-button>
-                            </md-content>
-    
+                        <md-content class="md-no-momentum">
+                            <md-input-container class="md-block">
+                                <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+                                <input ng-model="lc.user.username" type="text" placeholder="Email (required)" ng-required="true">
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <md-icon md-svg-src="img/icons/ic_account_box_24px.svg" class="password"></md-icon>
+                                <input ng-model="lc.user.password" type="password" placeholder="Password (required)" ng-required="true">
+                            </md-input-container>
+
+                            <md-button class="md-raised md-primary" type="submit" name="submit" value="Log In" aria-label="Log In" ng-click="lc.login()">Log In</md-button>
+                            <md-button a href="#register" class="md-raised" type="register" name="register" value="register" aria-label="Register">Register</a>
+                            </md-button>
+                        </md-content>
                     </md-card-actions>
-                </div>
-            </md-card-content>
-        </md-card>
-    </div>
+            </div>
+        </md-card-content>
+    </md-card>
+</div>

@@ -2,6 +2,15 @@ md-icon{
   font-family: 'Material Icons' !important;
 }
 
+.parent {
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
 #late {
   background-color: #ae0001;
 }

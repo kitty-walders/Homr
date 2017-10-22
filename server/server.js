@@ -1,9 +1,16 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+require('dotenv').config();
 
 var passport = require('./strategies/sql.localstrategy');
 var sessionConfig = require('./modules/session.config');
+
+// Using requst module to make HTTP requests from the server
+var request = require('request');
+
+// API Key & username are environment variables in Heroku
+var filestack = process.env.FILESTACK_API_KEY;
 
 // Route includes
 var indexRouter = require('./routes/index.router');
@@ -13,6 +20,7 @@ var appliancesRouter = require('./routes/appliances.router');
 var tasksRouter = require('./routes/tasks.router');
 var intakeRouter = require('./routes/intake.router');
 var homrRouter = require('./routes/homr.router');
+var filestackRouter = require('./routes/filestack.router');
 
 var port = process.env.PORT || 5000;
 
@@ -37,6 +45,7 @@ app.use('/appliances', appliancesRouter);
 app.use('/tasks', tasksRouter);
 app.use('/intake', intakeRouter);
 app.use('/homr', homrRouter);
+app.use('/filestack', filestackRouter);
 
 
 // Catch all bucket, must be last!

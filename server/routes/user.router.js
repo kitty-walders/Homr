@@ -9,6 +9,7 @@ router.get('/', function(req, res) {
     // send back user object from database
     var userInfo = {
       id: req.user.id,
+      phone: req.user.phone_number,
       username : req.user.username
     };
     res.send(userInfo);
