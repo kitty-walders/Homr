@@ -3,47 +3,48 @@
   <h1>
     <u>Your tasks:</u>
   </h1>
-
+  <div ng-repeat="x in tc.myTasksObj.tasks | orderBy:'task_due_date'">
+    <p>{{x.task_name}}</p>
+    <p>{{x.task_due_date | date: YYYY-MM-DD}}</p>
+  </div>
   <ang-accordion one-at-a-time="true">
     <collapsible-item item-title="Late Tasks" id="late">
       <hr>
-      <div ng-repeat="x in tc.myTasksObj.tasks">
+      <div ng-repeat="x in tc.myTasksObj.tasks | orderBy:'task_due_date'">
         <h2>
           <u>{{ x.task_name }}</u>
         </h2>
         <p>What is this: {{x.mytask_id}}</p>
         <p>{{x.task_description}}</p>
         <p>Frequency: Every {{x.freq_day}} days</p>
-        <p>Task Created on: {{x.task_creation_date}}</p>
-        <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete(x.mytask_id); tc.genNextTask(x)">Mark Complete</md-button>
+        <p><strong>DUE DATE: {{x.task_due_date| date: YYYY-MM-DD}}</strong></p>
+        <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete(x.mytask_id)">Mark Complete</md-button>
         <hr>
       </div>
     </collapsible-item>
     <collapsible-item item-title="Approaching Tasks" id="approaching">
       <hr>
-      <div ng-repeat="x in tc.myTasksObj.tasks">
+      <div ng-repeat="x in tc.myTasksObj.tasks | orderBy:'task_due_date'">
         <h2>
           <u>{{ x.task_name }}</u>
         </h2>
         <p>What is this: {{x.mytask_id}}</p>
         <p>{{x.task_description}}</p>
         <p>Frequency: Every {{x.freq_day}} days</p>
-        <p>Task Created on: {{x.task_creation_date}}</p>
-        <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete(x.mytask_id); tc.genNextTask(x)">Mark Complete</md-button>
+        <p><strong>DUE DATE: {{x.task_due_date| date: YYYY-MM-DD}}</strong></p>
+        <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete(x.mytask_id)">Mark Complete</md-button>
         <hr>
       </div>
     </collapsible-item>
     <collapsible-item item-title="Completed Tasks">
       <hr>
-      <div ng-repeat="x in tc.myTasksObj.tasks">
+      <div ng-repeat="x in tc.myTasksObj.tasks | orderBy:'task_completion_date'" ng-if="x.task_completion_date">
         <h2>
           <u>{{ x.task_name }}</u>
         </h2>
         <p>What is this: {{x.mytask_id}}</p>
         <p>{{x.task_description}}</p>
-        <p>Task Created on: {{x.task_creation_date}}</p>
-        <p ng-if="x.task_completion_date == NULL">Completed on: {{x.firstcompleteddate}}</p>
-        <p ng-if="x.task_completion_date">Completed with Homr: {{x.task_completion_date}}</p>
+        <p><strong>Completed with Homr: {{x.task_completion_date| date: YYYY-MM-DD}}</strong></p>
         <hr>
       </div>
     </collapsible-item>

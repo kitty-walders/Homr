@@ -30,20 +30,19 @@ router.get('/', function (req, res) {
 
 router.put('/', function (req, res) {
   var mytaskid = req.body.mytask_id;
-
+  
   // check if logged in
   if (req.isAuthenticated()) {
     pool.connect(function (conErr, client, done) {
       if (conErr) {
         res.sendStatus(500);
- 
       } else {
         client.query("UPDATE mytasks SET taskcompleted= 'TRUE', task_completion_date= CURRENT_TIMESTAMP WHERE mytask_id = $1", [mytaskid], function (queryErr, resultObj) {
           done();
           if (queryErr) {
             res.sendStatus(500);
           } else {
-            res.sendStatus(200)
+            res.sendStatus(200);
           }
         });
       }
@@ -54,5 +53,6 @@ router.put('/', function (req, res) {
   }
 
 });
+
 
 module.exports = router;

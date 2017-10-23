@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Homr</title>
-        <!-- Angular and Angular Route -->
-        <script type="text/javascript" src="vendors/angular/angular.min.js"></script>
-        <script type="text/javascript" src="vendors/angular-route/angular-route.min.js"></script>
 
-        <!-- API -->
-        <script type="text/javascript" src="https://static.filestackapi.com/v3/filestack.js"></script>
-        
-        <!-- Angular Materials -->
-        <link href="vendors/angular-materials/angular-material.css" rel="stylesheet" type="text/css">
-        <script src="vendors/angular-materials/angular-animate.min.js" charset="utf-8"></script>
-        <script src="vendors/angular-materials/angular-aria.min.js" charset="utf-8"></script>
-        <script src="vendors/angular-materials/angular-messages.min.js" charset="utf-8"></script>
-        <script src="vendors/angular-materials/angular-material.min.js" charset="utf-8"></script>
+<head>
+    <title>Homr</title>
+    <!-- Angular and Angular Route -->
+    <script type="text/javascript" src="vendors/angular/angular.min.js"></script>
+    <script type="text/javascript" src="vendors/angular-route/angular-route.min.js"></script>
 
-        <!-- Angular Material/ Accordian -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.15/angular.min.js"></script>
-        <script type="text/javascript" src="scripts/ang-accordion.js"></script>
-        <link rel="stylesheet" type="text/css" href="styles/ang-accordion.css">
-        
-        <!-- Client Side -->
-        <script type="text/javascript" src="scripts/client.js"></script>
-        <script type="text/javascript" src="scripts/controllers/tasks.controller.js"></script>
-        <script type="text/javascript" src="scripts/controllers/login.controller.js"></script>
-        <script type="text/javascript" src="scripts/controllers/user.controller.js"></script>
-        <script type="text/javascript" src="scripts/services/user.service.js"></script>
+    <!-- API -->
+    <script type="text/javascript" src="https://static.filestackapi.com/v3/filestack.js"></script>
 
-        <!-- CSS -->
-        <link rel="stylesheet" href="styles/style.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        rel="stylesheet" type="text/css">
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="https://use.fontawesome.com/cd21524c42.js"></script>
-    </head>
+    <!-- Angular Materials -->
+    <link href="vendors/angular-materials/angular-material.css" rel="stylesheet" type="text/css">
+    <script src="vendors/angular-materials/angular-animate.min.js" charset="utf-8"></script>
+    <script src="vendors/angular-materials/angular-aria.min.js" charset="utf-8"></script>
+    <script src="vendors/angular-materials/angular-messages.min.js" charset="utf-8"></script>
+    <script src="vendors/angular-materials/angular-material.min.js" charset="utf-8"></script>
 
-    <body ng-app="myApp">
-      <header ng-include="'/views/partials/header.html'"></header>
+    <!-- Angular Material/ Accordian -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.15/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/ang-accordion.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/ang-accordion.css">
 
-      <main ng-view></main>
+    <!-- Client Side -->
+    <script type="text/javascript" src="scripts/client.js"></script>
+    <script type="text/javascript" src="scripts/controllers/tasks.controller.js"></script>
+    <script type="text/javascript" src="scripts/controllers/login.controller.js"></script>
+    <script type="text/javascript" src="scripts/controllers/user.controller.js"></script>
+    <script type="text/javascript" src="scripts/services/user.service.js"></script>
 
-    </body>
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://use.fontawesome.com/cd21524c42.js"></script>
+</head>
+
+<body ng-app="myApp">
+    <header ng-include="'/views/partials/header.html'"></header>
+
+    <main ng-view></main>
+
+</body>
+
 </html>

@@ -29,12 +29,12 @@ myApp.controller('UserController', function (UserService, $location) {
   };
 
   //on button click- redirect users to /tasks
-  vm.redirect = function(){
+  vm.redirect = function () {
     $location.path("/tasks");
   }
 
   //allow user to upload images
-  vm.showPicker = function(){
+  vm.showPicker = function () {
     UserService.showPicker();
   }
 

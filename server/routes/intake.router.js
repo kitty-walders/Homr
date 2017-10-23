@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var pool = require('../modules/pool.js');
 var bodyParser = require('body-parser');
+var moment = require('moment');
+moment().format();
 
 router.post('/', function (req, res) {
 
@@ -13,7 +15,8 @@ router.post('/', function (req, res) {
   var freq_type = req.body.freq_type;
   var taskFcd = req.body.task_firstcompleteddate;
   var splTaskFcd = taskFcd.slice(0, 10);
-  var truthy = 'TRUE';
+  var task_due_date = moment(splTaskFcd, "YYYY-MM-DD").add(freq_day, 'days').calendar();
+  var spltask_due_date = task_due_date.slice(0, 10)
 
   if (req.isAuthenticated()) {
     pool.connect(function (conErr, client, done) {
@@ -21,8 +24,8 @@ router.post('/', function (req, res) {
         res.sendStatus(500);
 
       } else {
-        client.query("INSERT INTO mytasks (usersapp_id, task_id, task_name, task_description, freq_day, freq_type, firstcompleteddate, taskcompleted) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-          [usersappId, taskId, task_name, task_description, freq_day, freq_type, splTaskFcd, truthy], function (queryErr, resultObj) {
+        client.query("INSERT INTO mytasks (usersapp_id, task_id, task_name, task_description, freq_day, freq_type, firstcompleteddate, task_due_date) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+          [usersappId, taskId, task_name, task_description, freq_day, freq_type, splTaskFcd, spltask_due_date], function (queryErr, resultObj) {
             done();
             if (queryErr) {
               res.sendStatus(500);

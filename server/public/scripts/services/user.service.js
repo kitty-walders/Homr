@@ -75,17 +75,17 @@ myApp.service('UserService', function ($http, $location) {
       });
   };
 
-  self.markComplete = function (taskid) {
-    console.log('marked as completedSERVICE', taskid);
-    var mytaskid = { mytask_id: taskid };
-    //POST my completed tasks to the DB
+  self.markComplete = function (task) {
+    var mytaskid = { mytask_id: task };
+
+    console.log(' what is mytaskid?', mytaskid);
+    //POST my completed task to the DB
     $http({
       method: "PUT",
       url: '/tasks',
       data: mytaskid
     }).then(function (response) {
       self.genHomr();
-      self.genNextTask();
       swal({
         title: "WOW!",
         text: "You're awesome!",
@@ -95,23 +95,8 @@ myApp.service('UserService', function ($http, $location) {
     });
   };
 
-  self.genNextTask = function (task) {
-    console.log('marked as genNextTask');
-    var myNewTask = {
-      newTask: task
-    }
-    console.log('myNewTask', myNewTask);
-    // $http({
-    //   method: 'POST',
-    //   url: '/tasks',
-    //   data: z
-    // })
-    //   .then(function (res) {
-    //     console.log('response from genNextTask', res);
-    //   });
-  };
 
-  self.showPicker = function(task){
+  self.showPicker = function (task) {
     console.log('showPicker button working to service');
 
     // var client = filestack.init('	AJEHYT3XfQHOk875kYhHiz');

@@ -3,24 +3,24 @@ var localStrategy = require('passport-local').Strategy;
 var encryptLib = require('../modules/encryption');
 var pool = require('../modules/pool.js');
 
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser(function (id, done) {
 
   pool.connect(function (err, client, release) {
-    if(err) {
+    if (err) {
       release();
       done(err);
     }
 
     var user = {};
 
-    client.query("SELECT * FROM users WHERE id = $1", [id], function(err, result) {
+    client.query("SELECT * FROM users WHERE id = $1", [id], function (err, result) {
 
       // Handle Errors
-      if(err) {
+      if (err) {
         done(err);
         release();
       }
@@ -28,9 +28,9 @@ passport.deserializeUser(function(id, done) {
       user = result.rows[0];
       release();
 
-      if(!user) {
-          // user not found
-          return done(null, false, {message: 'Incorrect credentials.'});
+      if (!user) {
+        // user not found
+        return done(null, false, { message: 'Incorrect credentials.' });
       } else {
         // user found
         done(null, user);
@@ -42,39 +42,39 @@ passport.deserializeUser(function(id, done) {
 
 // Does actual work of logging in
 passport.use('local', new localStrategy({
-    passReqToCallback: true,
-    usernameField: 'username'
-    }, function(req, username, password, done) {
-	    pool.connect(function (err, client, release) {
+  passReqToCallback: true,
+  usernameField: 'username'
+}, function (req, username, password, done) {
+  pool.connect(function (err, client, release) {
 
-        // assumes the username will be unique, thus returning 1 or 0 results
-        client.query("SELECT * FROM users WHERE username = $1", [username],
-          function(err, result) {
-            var user = {};
+    // assumes the username will be unique, thus returning 1 or 0 results
+    client.query("SELECT * FROM users WHERE username = $1", [username],
+      function (err, result) {
+        var user = {};
 
-            // Handle Errors
-            if (err) {
-              done(null, user);
-            }
+        // Handle Errors
+        if (err) {
+          done(null, user);
+        }
 
-            release();
+        release();
 
-            if(result.rows[0] != undefined) {
-              user = result.rows[0];
-              // Hash and compare
-              if(encryptLib.comparePassword(password, user.password)) {
-                // all good!
-                done(null, user);
-              } else {
-                done(null, false, {message: 'Incorrect credentials.'});
-              }
-            } else {
-              done(null, false);
-            }
+        if (result.rows[0] != undefined) {
+          user = result.rows[0];
+          // Hash and compare
+          if (encryptLib.comparePassword(password, user.password)) {
+            // all good!
+            done(null, user);
+          } else {
+            done(null, false, { message: 'Incorrect credentials.' });
+          }
+        } else {
+          done(null, false);
+        }
 
-          });
-	    });
-    }
+      });
+  });
+}
 ));
 
 module.exports = passport;

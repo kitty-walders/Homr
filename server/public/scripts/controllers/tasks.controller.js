@@ -9,12 +9,8 @@ myApp.controller('TasksController', function (UserService) {
     UserService.genHomr();
   };
 
-  vm.genNextTask = function () {
-    UserService.genNextTask();
-  };
-
-  vm.markComplete = function (mytaskid) {
-    UserService.markComplete(mytaskid);
+  vm.markComplete = function (task) {
+    UserService.markComplete(task);
   };
 
 });
