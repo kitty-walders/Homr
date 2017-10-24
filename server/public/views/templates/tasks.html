@@ -5,12 +5,6 @@
   </h1>
   <p>Today is: {{tc.userService.currentDateString | date : YYY-MM-DD}}</p>
 
-  <div ng-repeat="x in tc.myTasksObj.tasks | orderBy:'task_due_date'" ng-if="x.future" ng-hide="x.task_completion_date">
-    <p>{{x}}</p>
-    <p>{{x.mytask_id}}</p>
-
-  </div>
-
   <ang-accordion one-at-a-time="true">
     <collapsible-item item-title="Late Tasks" id="late">
       <hr>
@@ -49,6 +43,19 @@
         <p> What is mytask_id? {{x.mytask_id}} </p>
         <p>{{x.task_description}}</p>
         <p><strong>Completed with Homr: {{x.task_completion_date| date: YYYY-MM-DD}}</strong></p>
+        <hr>
+      </div>
+    </collapsible-item>
+    <collapsible-item item-title="Future Tasks" id="future">
+      <hr>
+      <div ng-repeat="x in tc.myTasksObj.tasks | orderBy:'task_completion_date'" ng-if="x.future" ng-hide="x.task_completion_date">
+        <h2>
+          <u>{{ x.task_name }}</u>
+        </h2>
+        <p> What is mytask_id? {{x.mytask_id}} </p>
+        <p>{{x.task_description}}</p>
+        <p>Frequency: Every {{x.freq_day}} days</p>
+        <p><strong>DUE DATE: {{x.task_due_date| date: YYYY-MM-DD}}</strong></p>
         <hr>
       </div>
     </collapsible-item>
