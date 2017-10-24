@@ -5,22 +5,16 @@ myApp.service('UserService', function ($http, $location) {
   self.appliancesObj = { appliances: [] };
   self.myTasksObj = { tasks: [] };
   self.myRelTasksObj = { tasks: [] };
+  self.fileStack = filestack.init('AJEHYT3XfQHOk875kYhHiz');
 
   self.getDaysinMilliseconds = function(days){
     return 1000 * 60 * 60 * 24 * days;
   };
 
   self.currentDate = new Date();
-  console.log('self.self.currentDate ', self.currentDate);
-
   self.currentDateString = self.currentDate.toISOString();
-  console.log('self.currentDateString', self.currentDateString);
-
   self.sevenDaysFromToday = new Date(self.currentDate.valueOf() + self.getDaysinMilliseconds(7));
-  console.log('self.sevenDaysFromToday', self.sevenDaysFromToday);
-
   self.formattedSevenDaysFromToday = self.sevenDaysFromToday.toISOString();
-  console.log('self.formattedSevenDaysFromToday', self.formattedSevenDaysFromToday);
 
   self.getuser = function () {
     $http({
@@ -146,20 +140,22 @@ myApp.service('UserService', function ($http, $location) {
   }
 )};
 
-  self.showPicker = function (task) {
-    console.log('showPicker button working to service');
+  self.putImage = function (img) {
+    console.log('image URL>', img);
 
-    // var client = filestack.init('	AJEHYT3XfQHOk875kYhHiz');
-    // client.pick({accept: 'image/*',
-    // maxFiles: 5,
-    // imageMax: [1024, 1024]});
-
-    //PUT task image link as part of 
-    // $http({
-    //   method: "PUT",
-    //   url: '/filestack',
-    //   data: task
-    // })
+    // PUT task image link as part of task row
+    $http({
+      method: "PUT",
+      url: '/filestack',
+      data: img
+    })
+    .then(function (response) {
+      swal({
+        title: "Awesome job!",
+        text: "Thanks for uploading an image!",
+        icon: "success",
+      });
+    });
   }
 
   self.logout = function () {

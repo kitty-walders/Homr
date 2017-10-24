@@ -1,9 +1,10 @@
 <div ng-include="'views/partials/nav.html'"></div>
+<script src="https://static.filestackapi.com/v3/filestack.js"></script>
 <div class="container" ng-init="uc.getAppliances()">
     <h1>
         <u>Intake Form</u>
     </h1>
-
+    
     <ang-accordion one-at-a-time="true" ng-repeat="i in uc.appliancesObj.appliances">
         <collapsible-item item-title="{{i.appliance_name}}">
             <md-switch ng-model="i.isChecked" ng-change="uc.gatherAppliances(i)" class="md-primary" aria-label="{{i.appliance_name}}"></md-switch>
@@ -17,7 +18,9 @@
                     <p>When did you last {{ x.task_name }}?
                         <md-datepicker ng-model="x.task_firstcompleteddate" ng-change="uc.gatherDate(x)" md-placeholder="Enter date" required="true"></md-datepicker>
                     </p>
-                    <input type="button" value="Upload" ng-click="uc.showPicker()">
+                    <div ng-show="x.task_firstcompleteddate">
+                        <md-button class="md-raised md-primary" id="manage-client-avatar-container" ng-click="uc.pickAvatar($event, x)">Insert Image</md-button>
+                    </div>
                 </div>
             </div>
         </collapsible-item>

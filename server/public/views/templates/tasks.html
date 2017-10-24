@@ -16,6 +16,7 @@
         <p>{{x.task_description}}</p>
         <p>Frequency: Every {{x.freq_day}} days</p>
         <p><strong>DUE DATE: {{x.task_due_date| date: YYYY-MM-DD}}</strong></p>
+        <img ng-src="{{x.task_url}}"></img>
         <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete(x)">Mark Complete</md-button>
         <hr>
       </div>
@@ -30,6 +31,7 @@
         <p>{{x.task_description}}</p>
         <p>Frequency: Every {{x.freq_day}} days</p>
         <p><strong>DUE DATE: {{x.task_due_date| date: YYYY-MM-DD}}</strong></p>
+        <img ng-src="{{x.task_url}}"></img>
         <md-button class="md-raised md-primary" ng-click="tc.markComplete(x)">Mark Complete</md-button>
         <hr>
       </div>
@@ -56,6 +58,7 @@
         <p>{{x.task_description}}</p>
         <p>Frequency: Every {{x.freq_day}} days</p>
         <p><strong>DUE DATE: {{x.task_due_date| date: YYYY-MM-DD}}</strong></p>
+        <img ng-src="{{x.task_url}}"></img>
         <hr>
       </div>
     </collapsible-item>
