@@ -12,5 +12,4 @@ myApp.controller('TasksController', function (UserService) {
   vm.markComplete = function (task) {
     UserService.markComplete(task);
   };
-
 });

@@ -15,7 +15,7 @@
                     </h2>
                     <p>{{x.task_description}}</p>
                     <p>When did you last {{ x.task_name }}?
-                        <md-datepicker ng-model="x.task_firstcompleteddate" ng-change="uc.gatherDate(x)" md-placeholder="Enter date"></md-datepicker>
+                        <md-datepicker ng-model="x.task_firstcompleteddate" ng-change="uc.gatherDate(x)" md-placeholder="Enter date" required="true"></md-datepicker>
                     </p>
                     <input type="button" value="Upload" ng-click="uc.showPicker()">
                 </div>

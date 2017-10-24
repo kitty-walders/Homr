@@ -6,6 +6,22 @@ myApp.service('UserService', function ($http, $location) {
   self.myTasksObj = { tasks: [] };
   self.myRelTasksObj = { tasks: [] };
 
+  self.getDaysinMilliseconds = function(days){
+    return 1000 * 60 * 60 * 24 * days;
+  };
+
+  self.currentDate = new Date();
+  console.log('self.self.currentDate ', self.currentDate);
+
+  self.currentDateString = self.currentDate.toISOString();
+  console.log('self.currentDateString', self.currentDateString);
+
+  self.sevenDaysFromToday = new Date(self.currentDate.valueOf() + self.getDaysinMilliseconds(7));
+  console.log('self.sevenDaysFromToday', self.sevenDaysFromToday);
+
+  self.formattedSevenDaysFromToday = self.sevenDaysFromToday.toISOString();
+  console.log('self.formattedSevenDaysFromToday', self.formattedSevenDaysFromToday);
+
   self.getuser = function () {
     $http({
       method: "GET",
@@ -38,7 +54,23 @@ myApp.service('UserService', function ($http, $location) {
     })
       .then(function (res) {
         self.myTasksObj.tasks = res.data;
-      });
+
+        self.myTasksObj.tasks.forEach(function(task){
+          if(task.task_due_date <= self.currentDateString){
+            var late = "late";
+            task.late = true;
+          } else if (task.task_due_date > self.currentDateString && task.task_due_date <= self.formattedSevenDaysFromToday) {
+            var approaching = "approaching";
+            task.approaching = true;
+          } else if (task.task_due_date > self.currentDateString && task.task_due_date > self.formattedSevenDaysFromToday) {
+            var future = "future";
+            task.future = true;
+          } 
+          else {
+            console.log('when is this due?');
+          }
+        })
+      })
   };
 
   self.getRelevantTasks = function () {
@@ -76,25 +108,43 @@ myApp.service('UserService', function ($http, $location) {
   };
 
   self.markComplete = function (task) {
-    var mytaskid = { mytask_id: task };
-
-    console.log(' what is mytaskid?', mytaskid);
+    var mytask = { 
+      mytask_id: task.mytask_id,
+      firstcompleteddate: task.firstcompleteddate,
+      freq_day: task.freq_day,
+      freq_type: task.freq_type,
+      task_due_date: task.task_due_date,
+      task_completion_date: task.task_completion_date
+    };
+    
     //POST my completed task to the DB
     $http({
       method: "PUT",
       url: '/tasks',
-      data: mytaskid
+      data: mytask
     }).then(function (response) {
-      self.genHomr();
-      swal({
-        title: "WOW!",
-        text: "You're awesome!",
-        icon: "success",
-        button: "Do more tasks"
-      });
+      self.genNext(mytask);
     });
   };
 
+  self.genNext = function(mytask){
+    console.log('inside genNext mytask object?', mytask);
+    $http({
+      method: "POST",
+      url: '/tasks',
+      data: mytask
+    }).then(
+      function (response) {
+        console.log('inserted new task!');
+        self.genHomr();
+        swal({
+          title: "WOW!",
+          text: "You're awesome!",
+          icon: "success",
+          button: "Do more tasks"
+        });
+  }
+)};
 
   self.showPicker = function (task) {
     console.log('showPicker button working to service');
