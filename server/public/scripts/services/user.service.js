@@ -78,13 +78,25 @@ myApp.service('UserService', function ($http, $location) {
   };
 
   self.gatherDate = function (taskdate) {
+    console.log('gatherDate', taskdate);
     $http({
       method: 'POST',
       url: '/intake',
       data: taskdate,
     }).then(function (res) {
       console.log('response from server', res);
+    })
+  };
 
+  self.genHomrDate = function (homrdate) {
+    console.log('inside genHomrDate Service', homrdate);
+    $http({
+      method: 'POST',
+      url: '/homr',
+      data: homrdate,
+    }).then(function (res) {
+      console.log('response from server', res);
+      
     })
   }
 
@@ -141,8 +153,6 @@ myApp.service('UserService', function ($http, $location) {
 )};
 
   self.putImage = function (img) {
-    console.log('image URL>', img);
-
     // PUT task image link as part of task row
     $http({
       method: "PUT",
@@ -155,6 +165,19 @@ myApp.service('UserService', function ($http, $location) {
         text: "Thanks for uploading an image!",
         icon: "success",
       });
+      self.genHomr();
+    });
+  };
+
+  self.addTaskDesc = function (descToAdd) {
+    // PUT task description as part of task row
+    $http({
+      method: "PUT",
+      url: '/intake',
+      data: descToAdd
+    })
+    .then(function (response) {
+      self.genHomr();
     });
   }
 

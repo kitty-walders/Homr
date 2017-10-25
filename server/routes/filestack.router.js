@@ -1,10 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var pool = require('../modules/pool.js');
-require('dotenv').config();
-var request = require('request');
-
-
 
 router.put('/', function (req, res) {
     console.log('req??', req.body)
@@ -16,7 +12,6 @@ router.put('/', function (req, res) {
         pool.connect(function (conErr, client, done) {
             if (conErr) {
                 res.sendStatus(500);
-
             } else {
                 client.query("UPDATE mytasks SET task_url= $1 WHERE task_id = $2 AND usersapp_id = $3", [taskUrl, task_id, usersapp_id], function (queryErr, resultObj) {
                     done();

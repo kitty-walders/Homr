@@ -4,10 +4,9 @@
     <h1>
         <u>Intake Form</u>
     </h1>
-    
     <ang-accordion one-at-a-time="true" ng-repeat="i in uc.appliancesObj.appliances">
         <collapsible-item item-title="{{i.appliance_name}}">
-            <md-switch ng-model="i.isChecked" ng-change="uc.gatherAppliances(i)" class="md-primary" aria-label="{{i.appliance_name}}"></md-switch>
+            <md-switch ng-model="i.isChecked" ng-click="uc.gatherAppliances(i)" class="md-primary" aria-label="{{i.appliance_name}}"></md-switch>
             <div ng-show="i.isChecked">
                 <div ng-repeat="x in uc.myRelTasksObj.tasks" ng-if="x.appliance_id == i.appliance_id">
                     <hr>
@@ -15,11 +14,19 @@
                         <u>{{ x.task_name }}</u>
                     </h2>
                     <p>{{x.task_description}}</p>
-                    <p>When did you last {{ x.task_name }}?
-                        <md-datepicker ng-model="x.task_firstcompleteddate" ng-change="uc.gatherDate(x)" md-placeholder="Enter date" required="true"></md-datepicker>
+                    <p>Last completed {{ x.task_name }} on:
+                        <md-datepicker ng-model="x.task_firstcompleteddate" ng-change="uc.gatherDate(x)" md-placeholder="Enter date" required="true" md-max-date="uc.userService.currentDate"></md-datepicker>
+                        <md-button class="md-raised md-primary" ng-model="x.task_firstcompleteddate" ng-click="uc.genHomrDate(x)">I don't know when I last completed this task...</md-button>
                     </p>
                     <div ng-show="x.task_firstcompleteddate">
-                        <md-button class="md-raised md-primary" id="manage-client-avatar-container" ng-click="uc.pickAvatar($event, x)">Insert Image</md-button>
+                        <p>Optional:</p>
+                        <md-button class="md-raised md-primary" id="manage-client-avatar-container" ng-click="uc.addImg($event, x)">Upload Image</md-button>
+                        <input type="text" ng-model="taskDescription"></input>
+                        <md-button class="md-raised md-primary" ng-click="uc.addTaskDesc(taskDescription, x)">Add Task Description</md-button>
+                        <div ng-repeat="a in uc.myTasksObj.tasks" ng-if="a.task_id == x.task_id">
+                            <img ng-src="{{a.task_url}}"></img>
+                            <p>{{a.user_task_description}}</p>
+                        </div>
                     </div>
                 </div>
             </div>

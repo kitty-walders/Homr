@@ -12,9 +12,8 @@
         <h2>
           <u>{{ x.task_name }}</u>
         </h2>
-        <p> What is mytask_id? {{x.mytask_id}} </p>
-        <p>{{x.task_description}}</p>
-        <p>Frequency: Every {{x.freq_day}} days</p>
+        <p>{{x.task_description}}. This should be done every {{x.freq_day}} days</p>
+        <p ng-show="x.user_task_description">Extra Notes: {{x.user_task_description}}</p>
         <p><strong>DUE DATE: {{x.task_due_date| date: YYYY-MM-DD}}</strong></p>
         <img ng-src="{{x.task_url}}"></img>
         <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete(x)">Mark Complete</md-button>
@@ -27,9 +26,8 @@
         <h2>
           <u>{{ x.task_name }}</u>
         </h2>
-        <p> What is mytask_id? {{x.mytask_id}} </p>
-        <p>{{x.task_description}}</p>
-        <p>Frequency: Every {{x.freq_day}} days</p>
+        <p>{{x.task_description}}. This should be done every {{x.freq_day}} days</p>
+        <p ng-show="x.user_task_description">Extra Notes: {{x.user_task_description}}</p>
         <p><strong>DUE DATE: {{x.task_due_date| date: YYYY-MM-DD}}</strong></p>
         <img ng-src="{{x.task_url}}"></img>
         <md-button class="md-raised md-primary" ng-click="tc.markComplete(x)">Mark Complete</md-button>
@@ -42,8 +40,8 @@
         <h2>
           <u>{{ x.task_name }}</u>
         </h2>
-        <p> What is mytask_id? {{x.mytask_id}} </p>
-        <p>{{x.task_description}}</p>
+        <p>{{x.task_description}}. This should be done every {{x.freq_day}} days</p>
+        <p ng-show="x.user_task_description">Extra Notes: {{x.user_task_description}}</p>
         <p><strong>Completed with Homr: {{x.task_completion_date| date: YYYY-MM-DD}}</strong></p>
         <hr>
       </div>
@@ -54,9 +52,8 @@
         <h2>
           <u>{{ x.task_name }}</u>
         </h2>
-        <p> What is mytask_id? {{x.mytask_id}} </p>
-        <p>{{x.task_description}}</p>
-        <p>Frequency: Every {{x.freq_day}} days</p>
+        <p>{{x.task_description}}. This should be done every {{x.freq_day}} days</p>
+        <p ng-show="x.user_task_description">Extra Notes: {{x.user_task_description}}</p>
         <p><strong>DUE DATE: {{x.task_due_date| date: YYYY-MM-DD}}</strong></p>
         <img ng-src="{{x.task_url}}"></img>
         <hr>
