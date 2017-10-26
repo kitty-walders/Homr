@@ -1,64 +1,72 @@
-<div ng-include="'views/partials/nav.html'" ng-controller="UserController as uc"></div>
-<div class="container" ng-init="tc.genHomr()">
-  <h1>
-    <u>Your tasks:</u>
-  </h1>
-  <p>Today is: {{tc.userService.currentDateString | date : YYY-MM-DD}}</p>
-
-  <ang-accordion one-at-a-time="true">
-    <collapsible-item item-title="Late Tasks" id="late">
-      <hr>
-      <div ng-repeat="x in tc.myTasksObj.tasks | orderBy:'task_due_date'" ng-if="x.late" ng-hide="x.task_completion_date">
-        <h2>
-          <u>{{ x.task_name }}</u>
-        </h2>
-        <p>{{x.task_description}}. This should be done every {{x.freq_day}} days</p>
-        <p ng-show="x.user_task_description">Extra Notes: {{x.user_task_description}}</p>
-        <p><strong>DUE DATE: {{x.task_due_date| date: YYYY-MM-DD}}</strong></p>
-        <img ng-src="{{x.task_url}}"></img>
-        <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete(x)">Mark Complete</md-button>
-        <hr>
-      </div>
-    </collapsible-item>
-    <collapsible-item item-title="Approaching Tasks" id="approaching">
-      <hr>
-      <div ng-repeat="x in tc.myTasksObj.tasks | orderBy:'task_due_date'" ng-if="x.approaching" ng-hide="x.task_completion_date">
-        <h2>
-          <u>{{ x.task_name }}</u>
-        </h2>
-        <p>{{x.task_description}}. This should be done every {{x.freq_day}} days</p>
-        <p ng-show="x.user_task_description">Extra Notes: {{x.user_task_description}}</p>
-        <p><strong>DUE DATE: {{x.task_due_date| date: YYYY-MM-DD}}</strong></p>
-        <img ng-src="{{x.task_url}}"></img>
-        <md-button class="md-raised md-primary" ng-click="tc.markComplete(x)">Mark Complete</md-button>
-        <hr>
-      </div>
-    </collapsible-item>
-    <collapsible-item item-title="Completed Tasks">
-      <hr>
-      <div ng-repeat="x in tc.myTasksObj.tasks | orderBy:'task_completion_date'" ng-if="x.task_completion_date">
-        <h2>
-          <u>{{ x.task_name }}</u>
-        </h2>
-        <p>{{x.task_description}}. This should be done every {{x.freq_day}} days</p>
-        <p ng-show="x.user_task_description">Extra Notes: {{x.user_task_description}}</p>
-        <p><strong>Completed with Homr: {{x.task_completion_date| date: YYYY-MM-DD}}</strong></p>
-        <hr>
-      </div>
-    </collapsible-item>
-    <collapsible-item item-title="Future Tasks" id="future">
-      <hr>
-      <div ng-repeat="x in tc.myTasksObj.tasks | orderBy:'task_completion_date'" ng-if="x.future" ng-hide="x.task_completion_date">
-        <h2>
-          <u>{{ x.task_name }}</u>
-        </h2>
-        <p>{{x.task_description}}. This should be done every {{x.freq_day}} days</p>
-        <p ng-show="x.user_task_description">Extra Notes: {{x.user_task_description}}</p>
-        <p><strong>DUE DATE: {{x.task_due_date| date: YYYY-MM-DD}}</strong></p>
-        <img ng-src="{{x.task_url}}"></img>
-        <hr>
-      </div>
-    </collapsible-item>
-  </ang-accordion>
+<div class="navbar">
+  <section class="container" layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+    <div layout="row" layout-align="start center" flex>
+      <md-button class="md-primary" a href="#/user">User Settings</md-button>
+      <md-button class="md-primary" a href="#/tasks">My Tasks</md-button>
+      <md-button class="md-primary" a href="#/future">Future Tasks</md-button>
+      <md-button class="md-primary" a href="#/completed">Completed</md-button>
+      <span flex></span>
+    </div>
+    <p id="welcome" class="md-primary lead">Logged in as {{tc.userService.userObject.userName}}</p>
+    <md-button class="md-warn" ng-click="tc.userService.logout()">Log Out</md-button>
+  </section>
 </div>
+
+<div class="container" ng-init="tc.genHomr()">
+    <h1>
+        <u>Your Late Tasks:</u>
+      </h1>
+      <p>Due Today ({{tc.userService.currentDateString | date : YYY-MM-DD}}) or Past Due</p>
+      
+  <md-content class="md-padding" layout-xs="column" layout="row" ng-repeat="x in tc.myTasksObj.tasks | orderBy:'task_due_date'"
+    ng-if="x.late" ng-hide="x.task_completion_date">
+    <div flex-xs flex-gt-xs="50" layout="column">
+      <md-card id="late">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{ x.task_name }}</span>
+            <span class="md-subhead">{{x.task_description}} This should be done every {{x.freq_day}} days</span>
+            <p><strong>DUE DATE: {{x.task_due_date| date: YYYY-MM-DD}}</strong></p>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media"><img ng-show="{{x.task_url}}" ng-src="{{x.task_url}}"></img>
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <p ng-show="x.user_task_description">User Notes: {{x.user_task_description}}</p>
+          <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete(x)">Mark Complete</md-button>
+          <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.sendEmail(x)">Send Email Reminder</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </md-content>
+
+  <h1>
+    <u>Your Approaching Tasks:</u>
+  </h1>
+  <p>Approaching Tasks = Due within the next 7 days (between {{tc.userService.currentDateString | date : YYY-MM-DD}} to {{tc.userService.formattedSevenDaysFromToday
+    | date : YYY-MM-DD}})</p>
+  <md-content class="md-padding" layout-xs="column" layout="row" ng-repeat="x in tc.myTasksObj.tasks | orderBy:'task_due_date'"
+    ng-if="x.approaching" ng-hide="x.task_completion_date">
+    <div flex-xs flex-gt-xs="50" layout="column">
+      <md-card id="approaching">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{ x.task_name }}</span>
+            <span class="md-subhead">{{x.task_description}} This should be done every {{x.freq_day}} days</span>
+            <p><strong>DUE DATE: {{x.task_due_date| date: YYYY-MM-DD}}</strong></p>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media"><img ng-show="{{x.task_url}}" ng-src="{{x.task_url}}"></img>
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <p ng-show="x.user_task_description">User Notes: {{x.user_task_description}}</p>
+          <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete(x)">Mark Complete</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </md-content>
 </div>

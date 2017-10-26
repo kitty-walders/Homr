@@ -19,10 +19,10 @@ router.post('/', function (req, res) {
     var task_due_date = new Date();
   } else if (freq_type == "Spring"){
     var taskFcd = new Date();
-    var task_due_date = '2017-03-01'
+    var task_due_date = '2018-03-01'
   } else if (freq_type == "Summer"){
     var taskFcd = new Date();
-    var task_due_date = '2017-06-01'
+    var task_due_date = '2018-06-01'
   } else if (freq_type == "Fall"){
     var taskFcd = new Date();
     var task_due_date = '2017-09-01'

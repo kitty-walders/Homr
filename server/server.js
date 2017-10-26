@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 require('dotenv').config();
+var nodemailer = require('nodemailer');
 
 var passport = require('./strategies/sql.localstrategy');
 var sessionConfig = require('./modules/session.config');
@@ -21,6 +22,7 @@ var tasksRouter = require('./routes/tasks.router');
 var intakeRouter = require('./routes/intake.router');
 var homrRouter = require('./routes/homr.router');
 var filestackRouter = require('./routes/filestack.router');
+var nodemailerRouter = require('./routes/nodemailer.router');
 
 var port = process.env.PORT || 5000;
 
@@ -46,6 +48,7 @@ app.use('/tasks', tasksRouter);
 app.use('/intake', intakeRouter);
 app.use('/homr', homrRouter);
 app.use('/filestack', filestackRouter);
+app.use('/nodemailer', nodemailerRouter);
 
 
 // Catch all bucket, must be last!

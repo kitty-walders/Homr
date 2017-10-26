@@ -1,37 +1,68 @@
-<div ng-include="'views/partials/nav.html'"></div>
+<div class="navbar">
+    <section class="container" layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+        <div layout="row" layout-align="start center" flex>
+            <md-button class="md-primary" a href="#/user">User Settings</md-button>
+            <md-button class="md-primary" a href="#/tasks">My Tasks</md-button>
+            <md-button class="md-primary" a href="#/future">Future Tasks</md-button>
+            <md-button class="md-primary" a href="#/completed">Completed</md-button>
+            <span flex></span>
+        </div>
+        <p id="welcome" class="md-primary lead">Logged in as {{uc.userObject.userName}}</p>
+        <md-button class="md-warn" ng-click="uc.userService.logout()">Log Out</md-button>
+    </section>
+</div>
+
 <script src="https://static.filestackapi.com/v3/filestack.js"></script>
 <div class="container" ng-init="uc.getAppliances()">
     <h1>
         <u>Intake Form</u>
     </h1>
-    <ang-accordion one-at-a-time="true" ng-repeat="i in uc.appliancesObj.appliances">
-        <collapsible-item item-title="{{i.appliance_name}}">
-            <md-switch ng-model="i.isChecked" ng-click="uc.gatherAppliances(i)" class="md-primary" aria-label="{{i.appliance_name}}"></md-switch>
-            <div ng-show="i.isChecked">
-                <div ng-repeat="x in uc.myRelTasksObj.tasks" ng-if="x.appliance_id == i.appliance_id">
-                    <hr>
-                    <h2>
-                        <u>{{ x.task_name }}</u>
-                    </h2>
-                    <p>{{x.task_description}}</p>
-                    <p>Last completed {{ x.task_name }} on:
-                        <md-datepicker ng-model="x.task_firstcompleteddate" ng-change="uc.gatherDate(x)" md-placeholder="Enter date" required="true" md-max-date="uc.userService.currentDate"></md-datepicker>
-                        <md-button class="md-raised md-primary" ng-model="x.task_firstcompleteddate" ng-click="uc.genHomrDate(x)">I don't know when I last completed this task...</md-button>
-                    </p>
-                    <div ng-show="x.task_firstcompleteddate">
-                        <p>Optional:</p>
-                        <md-button class="md-raised md-primary" id="manage-client-avatar-container" ng-click="uc.addImg($event, x)">Upload Image</md-button>
-                        <input type="text" ng-model="taskDescription"></input>
-                        <md-button class="md-raised md-primary" ng-click="uc.addTaskDesc(taskDescription, x)">Add Task Description</md-button>
-                        <div ng-repeat="a in uc.myTasksObj.tasks" ng-if="a.task_id == x.task_id">
-                            <img ng-src="{{a.task_url}}"></img>
-                            <p>{{a.user_task_description}}</p>
-                        </div>
+    <h2>What is "Help Me HOMR"?</h2>
+    <p>Use "Help Me HOMR" if you don't know when you last completed the task! HOMR will autogenerate a recommended due date
+        for you.</p>
+    <md-content>
+        <md-list>
+            <md-list-item class="md-3-line" ng-repeat="i in uc.appliancesObj.appliances">
+                <div class="md-list-item-text">
+                    <h3>{{i.appliance_name}}</h3>
+                    <div ng-show="i.isChecked">
+                        <md-content class="md-padding" layout-xs="column" layout="row" ng-repeat="x in uc.myRelTasksObj.tasks" ng-if="x.appliance_id == i.appliance_id">
+                            <div flex-xs flex-gt-xs="50" layout="column">
+                                <md-card>
+                                    <md-card-title>
+                                        <md-card-title-text>
+                                            <span class="md-headline">{{ x.task_name }}</span>
+                                            <span class="md-subhead">{{x.task_description}}</span>
+                                        </md-card-title-text>
+                                    </md-card-title>
+                                    <md-card-actions layout="row" layout-align="end center">
+                                        <div ng-hide="x.task_firstcompleteddate">
+                                            <md-datepicker ng-model="x.task_firstcompleteddate" ng-change="uc.gatherDate(x)" md-placeholder="Enter date" md-max-date="uc.userService.currentDate"></md-datepicker>
+                                            <md-button class="md-raised md-primary" ng-model="x.task_firstcompleteddate" ng-click="uc.genHomrDate(x)">Help me Homr!</md-button>
+                                        </div>
+                                        <div ng-repeat="a in uc.myTasksObj.tasks" ng-if="a.task_id == x.task_id">
+                                            <md-card-title-media>
+                                                <div class="md-media-lg card-media"><img ng-show="{{a.task_url}}" ng-src="{{a.task_url}}"></img>
+                                                </div>
+                                            </md-card-title-media>
+                                            <div>Optional:</div>
+                                            <md-button class="md-raised md-primary" id="manage-client-avatar-container" ng-click="uc.addImg($event, x)">Upload Image</md-button>
+                                            <p><input type="text" ng-model="taskDescription"></input>
+                                                <md-button class="md-raised md-primary" ng-click="uc.addTaskDesc(taskDescription, x)">Add Task Description</md-button>
+                                            </p>
+                                            <p ng-if="a.user_task_description"><strong>User Notes:</strong> {{a.user_task_description}}</p>
+                                        </div>
+                                    </md-card-actions>
+                                </md-card>
+                            </div>
+                        </md-content>
                     </div>
                 </div>
-            </div>
-        </collapsible-item>
-    </ang-accordion>
-    <md-button ng-click="uc.redirect()" class="md-raised md-primary">Generate your Homr Schedule!</md-button>
-</div>
+
+                <md-switch ng-model="i.isChecked" ng-click="uc.gatherAppliances(i)" class="md-primary" aria-label="{{i.appliance_name}}"></md-switch>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
+    <md-button ng-click="uc.redirect()" class="md-raised md-primary">Take me to HOMR!</md-button>
 </div>

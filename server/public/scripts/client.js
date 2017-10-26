@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'angAccordion']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial']);
 
 /// Routes ///
 myApp.config(function ($routeProvider, $locationProvider) {
@@ -24,6 +24,24 @@ myApp.config(function ($routeProvider, $locationProvider) {
     })
     .when('/tasks', {
       templateUrl: '/views/templates/tasks.html',
+      controller: 'TasksController as tc',
+      resolve: {
+        getuser: function (UserService) {
+          return UserService.getuser();
+        }
+      }
+    })
+    .when('/future', {
+      templateUrl: '/views/templates/future.html',
+      controller: 'TasksController as tc',
+      resolve: {
+        getuser: function (UserService) {
+          return UserService.getuser();
+        }
+      }
+    })
+    .when('/completed', {
+      templateUrl: '/views/templates/completed.html',
       controller: 'TasksController as tc',
       resolve: {
         getuser: function (UserService) {

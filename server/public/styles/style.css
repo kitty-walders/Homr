@@ -6,6 +6,15 @@ md-icon{
   overflow: hidden;
 }
 
+#motto {
+  text-align: center;
+}
+
+ol {
+  clear: both;
+  overflow: hidden;
+}
+
 .card img {
   width: 100%;
   height: auto;
@@ -26,8 +35,8 @@ md-icon{
 body, html {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
   font-size: 14px;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .instructions .container h1 {
@@ -47,6 +56,10 @@ body, html {
 
 #container {
   margin-top: 10px;
+}
+
+.container{
+  padding-left: 16px;
 }
 
 .container p{
@@ -84,10 +97,6 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-}
-
-li {
-  float: left;
 }
 
 li a {

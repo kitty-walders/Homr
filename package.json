@@ -12,7 +12,6 @@
   "dependencies": {
     "angular": "^1.6.4",
     "angular-filepicker": "^1.1.4",
-    "angular-material-accordion": "^1.0.1",
     "angular-route": "^1.6.4",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.13.3",
@@ -22,7 +21,7 @@
     "express-session": "^1.13.0",
     "jquery": "^2.1.4",
     "moment": "^2.19.1",
-    "nodemailer": "^4.3.0",
+    "nodemailer": "^4.3.1",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
     "path": "^0.11.14",

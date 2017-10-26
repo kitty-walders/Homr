@@ -3,7 +3,6 @@ var router = express.Router();
 var pool = require('../modules/pool.js');
 
 router.put('/', function (req, res) {
-    console.log('req??', req.body)
     var taskUrl = req.body.taskUrl;
     var task_id = req.body.task_id;
     var usersapp_id = req.body.usersapp_id

@@ -25,7 +25,6 @@ router.post('/', function (req, res, next) {
   pool.connect(function (err, client, done) {
     if (err) {
       res.sendStatus(500);
-      console.log('connection err', err);
     }
     client.query("INSERT INTO users (username, phone_number, address, city, state, postal_code, password) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id",
       [saveUser.username, saveUser.phone_number, saveUser.address, saveUser.city, saveUser.state, saveUser.postal_code, saveUser.password],
@@ -34,7 +33,6 @@ router.post('/', function (req, res, next) {
 
         if (err) {
           res.sendStatus(500);
-          console.log('query err', err);
         } else {
           res.sendStatus(201);
         }

@@ -18,7 +18,8 @@ CREATE TABLE "appliances" (
 CREATE TABLE Users_Appliances (
 	"usersapp_id" serial primary key,
 	"user_id" INT REFERENCES users(id) ON DELETE CASCADE,
-	"appliance_id" INT REFERENCES appliances(appliance_id) ON DELETE CASCADE
+	"appliance_id" INT REFERENCES appliances(appliance_id) ON DELETE CASCADE,
+	unique (user_id, appliance_id)
 );
 
 CREATE TABLE "tasks" (
@@ -43,5 +44,6 @@ CREATE TABLE "mytasks" (
 	"task_due_date" DATE DEFAULT NULL,
 	"taskcompleted" BOOLEAN DEFAULT 'false',
 	"task_completion_date" TIMESTAMP,
-	"task_url" varchar (240)
+	"task_url" varchar (240),
+	"user_task_description" varchar (240)
 );

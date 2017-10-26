@@ -1,0 +1,41 @@
+<div class="navbar">
+    <section class="container" layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+        <div layout="row" layout-align="start center" flex>
+            <md-button class="md-primary" a href="#/user">User Settings</md-button>
+            <md-button class="md-primary" a href="#/tasks">My Tasks</md-button>
+            <md-button class="md-primary" a href="#/future">Future Tasks</md-button>
+            <md-button class="md-primary" a href="#/completed">Completed</md-button>
+            <span flex></span>
+        </div>
+        <p id="welcome" class="md-primary lead">Logged in as {{tc.userService.userObject.userName}}</p>
+        <md-button class="md-warn" ng-click="tc.userService.logout()">Log Out</md-button>
+    </section>
+</div>
+
+<div class="container" ng-init="tc.genHomr()">
+    <h1>
+        <u>Your Completed Tasks:</u>
+    </h1>
+    <p>All Tasks you marked as complete in HOMR</p>
+
+    <md-content class="md-padding" layout-xs="column" layout="row" ng-repeat="x in tc.myTasksObj.tasks | orderBy:'task_completion_date'"
+        ng-if="x.task_completion_date">
+        <div flex-xs flex-gt-xs="50" layout="column">
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{ x.task_name }}</span>
+                        <span class="md-subhead">{{x.task_description}} This should be done every {{x.freq_day}} days</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-lg card-media"><img ng-show="{{x.task_url}}" ng-src="{{x.task_url}}"></img>
+                        </div>
+                    </md-card-title-media>
+                </md-card-title>
+                <md-card-actions layout="row" layout-align="end center">
+                    <p ng-show="x.user_task_description">User Notes: {{x.user_task_description}}</p>
+                    <p><strong>Completed with Homr on: {{x.task_completion_date| date: YYYY-MM-DD}}</strong></p>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </md-content>

@@ -20,7 +20,7 @@ myApp.controller('UserController', function (UserService, $location) {
   vm.getAppliances = function () {
     UserService.getAppliances();
   };
-
+  
   //get ALL tasks from DB to the DOM
   vm.getRelevantTasks = function () {
     UserService.getRelevantTasks();

@@ -78,25 +78,27 @@ myApp.service('UserService', function ($http, $location) {
   };
 
   self.gatherDate = function (taskdate) {
-    console.log('gatherDate', taskdate);
     $http({
       method: 'POST',
       url: '/intake',
       data: taskdate,
     }).then(function (res) {
-      console.log('response from server', res);
+      self.genHomr();
     })
   };
 
   self.genHomrDate = function (homrdate) {
-    console.log('inside genHomrDate Service', homrdate);
     $http({
       method: 'POST',
       url: '/homr',
       data: homrdate,
     }).then(function (res) {
-      console.log('response from server', res);
-      
+      self.genHomr();
+      swal({
+        title: "HOMR Date added!",
+        text: "We got your back!",
+        icon: "success",
+      });
     })
   }
 
@@ -114,14 +116,19 @@ myApp.service('UserService', function ($http, $location) {
   };
 
   self.markComplete = function (task) {
+
     var mytask = { 
       mytask_id: task.mytask_id,
       firstcompleteddate: task.firstcompleteddate,
       freq_day: task.freq_day,
       freq_type: task.freq_type,
       task_due_date: task.task_due_date,
-      task_completion_date: task.task_completion_date
+      task_completion_date: task.task_completion_date,
+      task_url: task.task_url,
+      user_task_description: task.user_task_description
     };
+
+    console.log('mytask mark complete', mytask);
     
     //POST my completed task to the DB
     $http({
@@ -133,15 +140,37 @@ myApp.service('UserService', function ($http, $location) {
     });
   };
 
+  self.sendEmail = function (task) {
+    
+        var mymail = {
+          user_email: self.userObject,
+          task_name: task.task_name,
+          task_description: task.task_description,
+          task_due_date: task.task_due_date,
+          task_url: task.task_url,
+          user_task_description: task.user_task_description
+        };
+        
+        //POST sendEmail request to the server
+        $http({
+          method: "POST",
+          url: '/nodemailer',
+          data: mymail
+        }).then(function (response) {
+          swal({
+            title: "Email sent",
+            icon: "success",
+          });
+        });
+  };
+  
   self.genNext = function(mytask){
-    console.log('inside genNext mytask object?', mytask);
     $http({
       method: "POST",
       url: '/tasks',
       data: mytask
     }).then(
       function (response) {
-        console.log('inserted new task!');
         self.genHomr();
         swal({
           title: "WOW!",
@@ -177,6 +206,11 @@ myApp.service('UserService', function ($http, $location) {
       data: descToAdd
     })
     .then(function (response) {
+      swal({
+        title: "Task Details Updated",
+        text: "Thanks for adding details to your task!",
+        icon: "success",
+      });
       self.genHomr();
     });
   }
