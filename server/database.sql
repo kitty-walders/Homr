@@ -3,11 +3,7 @@ CREATE TABLE "users" (
   "username" varchar(80) not null UNIQUE,
   "password" varchar(240) not null,
   "phone_number" varchar(10),
-  "user_created_at" TIMESTAMP DEFAULT NOW(),
-  "address" varchar(240) not null,
-  "city" varchar(80) not null,
-  "state" varchar(80) not null,
-  "postal_code" varchar(5) not null
+  "user_created_at" TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE "appliances" (
@@ -44,6 +40,5 @@ CREATE TABLE "mytasks" (
 	"task_due_date" DATE DEFAULT NULL,
 	"taskcompleted" BOOLEAN DEFAULT 'false',
 	"task_completion_date" TIMESTAMP,
-	"task_url" varchar (240),
-	"user_task_description" varchar (240)
+	"task_url" varchar (240)
 );

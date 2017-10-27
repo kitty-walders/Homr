@@ -1,0 +1,22 @@
+<div class="navbar">
+    <section class="container" layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+        <div layout="row" layout-align="start center" flex>
+            <md-button class="md-primary" a href="#/user">User Settings</md-button>
+            <md-button class="md-primary" a href="#/tasks">My HOMR</md-button>
+            <md-button class="md-primary" a href="#/future">Future Tasks</md-button>
+            <md-button class="md-primary" a href="#/completed">Completed</md-button>
+            <md-button class="md-primary" a href="#/photo">Photo Gallery</md-button>
+            <span flex></span>
+        </div>
+        <p id="welcome" class="md-primary lead">Logged in as {{tc.userService.userObject.userName}}</p>
+        <md-button class="md-warn" ng-click="tc.userService.logout()">Log Out</md-button>
+    </section>
+</div>
+
+<div class="container" ng-init="tc.genHomr()">
+    <h1>
+        <u>Photo Gallery:</u>
+    </h1>
+    <div ng-repeat="x in tc.myTasksObj.tasks" ng-hide="x.taskcompleted">
+        <img ng-src="{{x.task_url}}"></img>
+    </div>

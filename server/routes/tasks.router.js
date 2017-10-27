@@ -65,7 +65,7 @@ router.post('/', function (req, res) {
       if (conErr) {
         res.sendStatus(500);
       } else {
-        client.query("INSERT INTO mytasks(usersapp_id, task_url, user_task_description, task_id, firstcompleteddate, task_name, task_description, freq_day, freq_type, task_due_date) SELECT usersapp_id, task_url, user_task_description, task_id, firstcompleteddate, task_name, task_description, freq_day, freq_type, $1 FROM mytasks WHERE mytask_id=$2",
+        client.query("INSERT INTO mytasks(usersapp_id, task_url, task_id, firstcompleteddate, task_name, task_description, freq_day, freq_type, task_due_date) SELECT usersapp_id, task_url, task_id, firstcompleteddate, task_name, task_description, freq_day, freq_type, $1 FROM mytasks WHERE mytask_id=$2",
         [nextduedate, mytaskid], function (queryErr, resultObj) {
           done();
           if (queryErr) {

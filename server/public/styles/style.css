@@ -20,8 +20,25 @@ ol {
   height: auto;
 }
 
+.md-3-line{
+  background-color: lightgrey;
+}
+
+#homrhelper {
+  background-color: orange;
+}
+
 #late {
-  background-color: #ae0001;
+  background-color: tomato;
+}
+
+#intake {
+  background-color: lightgray; 
+}
+
+#input{
+  padding: 8px 8px;
+  box-sizing: border-box;
 }
 
 #approaching {
@@ -29,7 +46,11 @@ ol {
 }
 
 #future {
-  background-color: green;
+  background-color: lightgreen;
+}
+
+#completed {
+  background-color: tan;
 }
 
 body, html {
@@ -60,6 +81,7 @@ body, html {
 
 .container{
   padding-left: 16px;
+  padding-right: 16px;
 }
 
 .container p{

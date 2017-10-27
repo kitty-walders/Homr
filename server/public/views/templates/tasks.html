@@ -2,9 +2,10 @@
   <section class="container" layout="row" layout-sm="column" layout-align="end center" layout-wrap>
     <div layout="row" layout-align="start center" flex>
       <md-button class="md-primary" a href="#/user">User Settings</md-button>
-      <md-button class="md-primary" a href="#/tasks">My Tasks</md-button>
+      <md-button class="md-primary" a href="#/tasks">My HOMR</md-button>
       <md-button class="md-primary" a href="#/future">Future Tasks</md-button>
       <md-button class="md-primary" a href="#/completed">Completed</md-button>
+      <md-button class="md-primary" a href="#/photo">Photo Gallery</md-button>
       <span flex></span>
     </div>
     <p id="welcome" class="md-primary lead">Logged in as {{tc.userService.userObject.userName}}</p>
@@ -34,7 +35,6 @@
           </md-card-title-media>
         </md-card-title>
         <md-card-actions layout="row" layout-align="end center">
-          <p ng-show="x.user_task_description">User Notes: {{x.user_task_description}}</p>
           <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete(x)">Mark Complete</md-button>
           <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.sendEmail(x)">Send Email Reminder</md-button>
         </md-card-actions>
@@ -63,8 +63,8 @@
           </md-card-title-media>
         </md-card-title>
         <md-card-actions layout="row" layout-align="end center">
-          <p ng-show="x.user_task_description">User Notes: {{x.user_task_description}}</p>
           <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.markComplete(x)">Mark Complete</md-button>
+          <md-button class="md-raised md-primary" id={{x.mytask_id}} ng-click="tc.sendEmail(x)">Send Email Reminder</md-button>
         </md-card-actions>
       </md-card>
     </div>

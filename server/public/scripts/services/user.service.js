@@ -78,12 +78,16 @@ myApp.service('UserService', function ($http, $location) {
   };
 
   self.gatherDate = function (taskdate) {
+    taskdate.hasChosenDate = true;
+
     $http({
       method: 'POST',
       url: '/intake',
       data: taskdate,
     }).then(function (res) {
       self.genHomr();
+    }).then(function() {
+      taskdate.hasChosenDate = true;
     })
   };
 
@@ -99,6 +103,8 @@ myApp.service('UserService', function ($http, $location) {
         text: "We got your back!",
         icon: "success",
       });
+    }).then(function() {
+      homrdate.hasChosenDate = true;
     })
   }
 
@@ -124,8 +130,7 @@ myApp.service('UserService', function ($http, $location) {
       freq_type: task.freq_type,
       task_due_date: task.task_due_date,
       task_completion_date: task.task_completion_date,
-      task_url: task.task_url,
-      user_task_description: task.user_task_description
+      task_url: task.task_url
     };
 
     console.log('mytask mark complete', mytask);
@@ -147,8 +152,7 @@ myApp.service('UserService', function ($http, $location) {
           task_name: task.task_name,
           task_description: task.task_description,
           task_due_date: task.task_due_date,
-          task_url: task.task_url,
-          user_task_description: task.user_task_description
+          task_url: task.task_url
         };
         
         //POST sendEmail request to the server
@@ -197,23 +201,6 @@ myApp.service('UserService', function ($http, $location) {
       self.genHomr();
     });
   };
-
-  self.addTaskDesc = function (descToAdd) {
-    // PUT task description as part of task row
-    $http({
-      method: "PUT",
-      url: '/intake',
-      data: descToAdd
-    })
-    .then(function (response) {
-      swal({
-        title: "Task Details Updated",
-        text: "Thanks for adding details to your task!",
-        icon: "success",
-      });
-      self.genHomr();
-    });
-  }
 
   self.logout = function () {
     $http({

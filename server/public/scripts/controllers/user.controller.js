@@ -37,7 +37,7 @@ myApp.controller('UserController', function (UserService, $location) {
   };
 
   //allow user to upload images
-  vm.addImg = (event, task) => {    
+  vm.addImg = function (event, task) {    
     UserService.fileStack.pick({
       accept: 'image/*',
       maxFiles: 3
@@ -54,16 +54,6 @@ myApp.controller('UserController', function (UserService, $location) {
       
       UserService.putImage(urlToAdd);
     })
-  };
-
-  //allow user to upload task description
-  vm.addTaskDesc = (taskDescription, task) => {  
-    var descToAdd = {
-        task_description: taskDescription,
-        usersapp_id: task.usersapp_id,
-        task_id: task.task_id
-    }
-      UserService.addTaskDesc(descToAdd);
   };
 
 });
