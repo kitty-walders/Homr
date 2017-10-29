@@ -86,13 +86,13 @@ CREATE TABLE "mytasks" (
 );
 ```
 
-## Screen Shot
+## Screen Shots
 
 ![Intake Form](https://github.com/Kitty-Ng/Homr/blob/master/server/public/assets/img/Intake_Form.png "Intake Form")
 ![Late Tasks](https://github.com/Kitty-Ng/Homr/blob/master/server/public/assets/img/Late_Tasks.png "Late Tasks")
-![Approaching Tasks](https://github.com/Kitty-Ng/Homr/blob/master/server/public/assets/img/Approaching_Tasks.png"Approaching Tasks")
-![Future Tasks](https://github.com/Kitty-Ng/Homr/blob/master/server/public/assets/img/Future_Tasks.png"Future Tasks")
-![Completed Tasks](https://github.com/Kitty-Ng/Homr/blob/master/server/public/assets/img/Completed_Tasks.png"Completed Tasks")
+![Approaching Tasks](https://github.com/Kitty-Ng/Homr/blob/master/server/public/assets/img/Approaching_Tasks.png "Approaching Tasks")
+![Future Tasks](https://github.com/Kitty-Ng/Homr/blob/master/server/public/assets/img/Future_Tasks.png "Future Tasks")
+![Completed Tasks](https://github.com/Kitty-Ng/Homr/blob/master/server/public/assets/img/Completed_Tasks.png "Completed Tasks")
 ![Photo Gallery](https://github.com/Kitty-Ng/Homr/blob/master/server/public/assets/img/Photo_Gallery.png "Photo Gallery")
 
 <!-- ## Documentation
