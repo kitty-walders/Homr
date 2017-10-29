@@ -30,7 +30,7 @@ router.post('/', function (req, res) {
     var taskFcd = new Date();
     var task_due_date = '2017-12-01'
   } else {
-    console.log('idk what season this task is am in');
+    console.log('idk what season this task is in');
   }
 
   if (req.isAuthenticated()) {
