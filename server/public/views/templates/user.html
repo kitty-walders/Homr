@@ -39,12 +39,14 @@
                                         </md-card-title-text>
                                     </md-card-title>
                                     <md-card-actions layout="row" layout-align="end center" ng-hide="x.hasChosenDate">
-                                        <div ng-hide = "x.task_firstcompleteddate">
+                                            <span class="md-subhead">Last completed:</span>
+                                            <div ng-hide = "x.task_firstcompleteddate">
                                             <md-datepicker ng-model="x.task_firstcompleteddate" ng-change="uc.gatherDate(x)" md-placeholder="Enter date" md-max-date="uc.userService.currentDate"></md-datepicker>
                                         </div>
                                         <md-button class="md-raised" id="homrhelper" ng-click="uc.genHomrDate(x)">Help me Homr!</md-button>
                                     </md-card-actions>
                                     <md-card-actions ng-show="x.hasChosenDate">
+                                            <span class="md-subhead">Optional:</span>
                                         <md-button class="md-raised md-primary" id="manage-client-avatar-container" ng-click="uc.addImg($event, x)" layout="row" layout-align="end center">Upload Image</md-button>
                                         </div>
                                     </md-card-actions>

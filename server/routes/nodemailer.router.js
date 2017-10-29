@@ -42,5 +42,73 @@ router.post('/', function(req, res) {
   res.sendStatus(200);
 });
 
+router.post('/allLate', function(req, res) {
+  // console.log('req.body', req.body)
+  var mailer = req.body.lateTasks;
+  var taskname = mailer.map(function(x){return x.task_name})
+  var taskjoin = taskname.join();
+  var userEmail = req.body.user_email.userName;
+
+  // console.log('mailer', mailer)
+  // console.log('tasknames', taskname)
+
+  var mailOptions = {
+    from: '"HOMR"' + process.env.USERNAME + "'", 
+    to: userEmail, // list of receivers
+    subject: "'HOMR - Your Late Tasks'", // Subject line
+    text: taskjoin, // plain text body
+    html:
+      '<b>' +
+      taskjoin +
+      '</b>'
+      // html body
+  };
+
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      return console.log(error);
+    } else {
+    console.log('Message %s sent: %s', info.messageId, info.response);
+    res.sendStatus(200);
+    }
+  });
+
+  res.sendStatus(200);
+});
+
+router.post('/allCompleted', function(req, res) {
+  // console.log('req.body', req.body)
+  var mailer = req.body.completedTasks;
+  var taskname = mailer.map(function(x){return x.task_name})
+  var taskjoin = taskname.join();
+  var userEmail = req.body.user_email.userName;
+
+  // console.log('mailer', mailer)
+  // console.log('tasknames', taskname)
+
+  var mailOptions = {
+    from: '"HOMR"' + process.env.USERNAME + "'", 
+    to: userEmail, // list of receivers
+    subject: "'HOMR - Your History with HOMR... All Completed Tasks'", // Subject line
+    text: taskjoin, // plain text body
+    html:
+      '<b>' +
+      taskjoin +
+      '</b>'
+      // html body
+  };
+
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      return console.log(error);
+    } else {
+    console.log('Message %s sent: %s', info.messageId, info.response);
+    res.sendStatus(200);
+    }
+  });
+
+  res.sendStatus(200);
+});
+
 
 module.exports = router;

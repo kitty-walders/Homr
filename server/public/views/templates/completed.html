@@ -18,6 +18,7 @@
         <u>Your Completed Tasks:</u>
     </h1>
     <p>All Tasks you marked as complete in HOMR</p>
+    <md-button class="md-raised md-primary" ng-click="tc.userService.sendAllCompletedEmail(tc.myTasksObj.tasks)">Send Email of HOMR History</md-button>
 
     <md-content class="md-padding" layout-xs="column" layout="row" ng-repeat="x in tc.myTasksObj.tasks | orderBy:'task_completion_date'"
         ng-if="x.task_completion_date">
@@ -27,6 +28,7 @@
                     <md-card-title-text>
                         <span class="md-headline">{{ x.task_name }}</span>
                         <span class="md-subhead">{{x.task_description}} This should be done every {{x.freq_day}} days</span>
+                        <p>Original due date: {{x.task_due_date| date: YYYY-MM-DD}}</p>
                     </md-card-title-text>
                     <md-card-title-media>
                         <div class="md-media-lg card-media"><img ng-show="{{x.task_url}}" ng-src="{{x.task_url}}"></img>
@@ -39,3 +41,4 @@
             </md-card>
         </div>
     </md-content>
+</div>

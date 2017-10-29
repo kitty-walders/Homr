@@ -14,11 +14,13 @@
 </div>
 
 <div class="container" ng-init="tc.genHomr()">
-    <h1>
+      <h1>
         <u>Your Late Tasks:</u>
       </h1>
       <p>Due Today ({{tc.userService.currentDateString | date : YYY-MM-DD}}) or Past Due</p>
       
+      <md-button class="md-raised md-primary" ng-click="tc.userService.sendAllLateEmail(tc.myTasksObj.tasks)">Send Email for ALL LATE TASKS</md-button>
+
   <md-content class="md-padding" layout-xs="column" layout="row" ng-repeat="x in tc.myTasksObj.tasks | orderBy:'task_due_date'"
     ng-if="x.late" ng-hide="x.task_completion_date">
     <div flex-xs flex-gt-xs="50" layout="column">

@@ -167,6 +167,54 @@ myApp.service('UserService', function ($http, $location) {
           });
         });
   };
+
+  self.sendAllLateEmail = function (taskArr) {
+      var lateArr = taskArr.filter(function(task){return task.late === true && task.taskcompleted === false});
+
+      console.log('lateArr', lateArr);
+
+      var myLateMail = {
+          user_email: self.userObject,
+          lateTasks: lateArr
+        };
+
+       //POST sendAllLateEmail request to the server
+        $http({
+          method: "POST",
+          url: '/nodemailer/allLate',
+          data: myLateMail
+        })
+        .then(function (response) {
+          swal({
+            title: "Email sent",
+            icon: "success",
+          });
+        });
+    }
+  
+  self.sendAllCompletedEmail = function (taskArr) {
+    var CompletedArr= taskArr.filter(function(task){return task.taskcompleted === true});
+    
+          console.log('CompletedArr', CompletedArr);
+    
+          var myCompletedMail = {
+              user_email: self.userObject,
+              completedTasks: CompletedArr
+            };
+    
+           //POST sendAllCompletedEmail request to the server
+            $http({
+              method: "POST",
+              url: '/nodemailer/allCompleted',
+              data: myCompletedMail 
+            })
+            .then(function (response) {
+              swal({
+                title: "Email sent",
+                icon: "success",
+              });
+            });
+  }
   
   self.genNext = function(mytask){
     $http({
